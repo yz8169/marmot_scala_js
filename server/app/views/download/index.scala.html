@@ -1,0 +1,95 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Download-MARDB") {
+	<style>
+			ul > li {
+				line-height: 1.7em;
+			}
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Download</h2>
+		</div>
+	</div>
+
+	<h4>Genome data</h4>
+	<div class="table-responsive" id="tableContent">
+		<table class="display table table-bordered" id="table" data-pagination="true"
+		data-toolbar="#toolbar" data-page-list="[10, 25, 50]"
+		style="table-layout: fixed;
+			text-overflow: ellipsis"
+		>
+		</table>
+
+	</div>
+
+	<h4 style="margin-top: 20px">SNP data</h4>
+	<div class="table-responsive">
+		<table class="display table table-bordered" id="snpTable" data-pagination="true"
+		data-toolbar="#toolbar" data-page-list="[10, 25, 50]"
+		style="table-layout: fixed;
+			text-overflow: ellipsis">
+			<thead>
+				<th>File name</th>
+				<th>File description</th>
+				<th>MD5</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="@routes.DownloadController.downloadData()?fileName=Marmot_correct.raw.filter.vcf.gz">
+						Marmot_correct.raw.filter.vcf.gz</a></td>
+					<td>SNP information of 5 marmots</td>
+					<td>05eadca9234eb874d68f076a29183958</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+
+
+	<h4 style="margin-top: 15px">Expression data</h4>
+	<ul>
+		<li>
+			<a href="@routes.DownloadController.downloadData()?fileName=hibernators-expression-matrix.xlsx">
+				hibernators-expression-matrix.xlsx</a>
+
+		</li>
+		<li>
+			<a href="@routes.DownloadController.downloadData()?fileName=Plague-host-expression-matrix.xlsx">
+				Plague-host-expression-matrix.xlsx</a>
+		</li>
+
+	</ul>
+
+	<h4 style="margin-top: 15px">Annotation data</h4>
+	<ul>
+		<li>
+			<a href="@routes.DownloadController.downloadData()?fileName=Alpine_marmot_functional_annotation.xlsx">
+				Alpine_marmot_functional_annotation.xlsx</a>
+
+		</li>
+		<li>
+			<a href="@routes.DownloadController.downloadData()?fileName=Yellow-bellied_marmot_functional_annotation.xlsx">
+				Yellow-bellied_marmot_functional_annotation.xlsx</a>
+		</li>
+		<li>
+			<a href="@routes.DownloadController.downloadData()?fileName=Himalayan_marmot_function.annotation.xlsx">
+				Himalayan_marmot_function.annotation.xlsx</a>
+		</li>
+
+	</ul>
+
+
+	<script>
+			$(function () {
+				Download.init
+
+			})
+
+	</script>
+
+}

@@ -1,0 +1,161 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Home-MARDB") {
+
+
+	<style>
+			.thumbnail {
+				height: 250px;
+			}
+
+			.thumbnail > .row {
+				margin-top: 12px;
+			}
+
+			.myFont {
+				font-size: 24px;
+			}
+
+			.panel-default > .panel-heading {
+				/*background:transparent;*/
+			}
+
+
+	</style>
+	<div class="row">
+		<div class="col-md-9" style="margin-top: 15px">
+			<div>
+				<p class="text-justify">
+					Marmots are large Holarctic rodents in the genus Marmota with 14 living species. Most marmot species occupy a harsh environment characterized by a long, cold season without food. Their physiology is highly adapted to cope with this condition by hibernating in burrows. Global warming since the last ice age has reduced the geographic distribution of some of the marmots. The plagues in some marmots are known to co-occur with human epidemics in the same area, which give rise to a unique surveillance and a major public health concern. MarmotDB database aims to collect the currently available marmots’ genomic data and to characterize the molecular mechanism of hibernating and plague infection by comparisons of the expression profiles from different hibernators and plague hosts or transmitters.
+				</p>
+			</div>
+
+			<h3 class="panel-title" style="margin-top: 38px;margin-bottom: 10px"> World Marmot</h3>
+			<hr style="margin-bottom: 15px;margin-top: 5px;border-top: 1px solid #0D4D79;">
+					<div class="row">
+						<div class="col-sm-12">
+							<img src="@routes.Assets.at("images/marmot_world.png")" style="width: 100%">
+						</div>
+						<style>
+								.mySquare {
+									font-size: 19px;
+								}
+						</style>
+						<div class="col-sm-12" style="margin-top: 5px;
+							font-size: 14px">
+							<div class="col-sm-3"><span class="mySquare" style="color: #A14F92">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#himalayan">1.Himalayan marmot</a>
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #916231">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#alpine">2.Alpine marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #D01C1B">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#long-tailed">3.Long-tailed marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #656666">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#gray">4.Gray marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #E60012">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#mongolia">5.Mongolia marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #575DA1">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#alaska">6.Alaska marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #B2155C">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#woodchuck">7.Woodchuck</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #013887">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#olympic">8.Olympic marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #EABF27">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#yellow">9.Yellow-bellied marmot</a>
+
+							</div>
+
+							<div class="col-sm-3"><span class="mySquare" style="color: #DF633A">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#hoary">10.Hoary marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #67B032">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#menzbier">11.Menzbier's marmot</a>
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #225DA3">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#black">12.Black-capped marmot</a>
+
+							</div>
+							<div class="col-sm-3"><span class="mySquare" style="color: #47AB61">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#bobak">13.Bobak marmot</a>
+
+							</div>
+							<div class="col-sm-5"><span class="mySquare" style="color: #E5E243">&#9632;</span>
+								<a href="@routes.AppController.toIntroduction()#vancouver">14.Vancouver Island marmot</a>
+
+							</div>
+
+						</div>
+
+
+					</div>
+
+		</div>
+		<div class="col-md-3">
+
+			<div align="center" style="margin-top: 20px">
+				<video src="@routes.Assets.at("videos/附件7.5.mp4")" style="width: 95%;
+					margin-bottom: 20px" controls>
+				</video>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="fa fa-list"></i> Release notes</h3>
+				</div>
+				<div class="panel-body">
+					<ul class="list-unstyled">
+						<li><i class="fa fa-chevron-circle-right"></i>
+							Himalayan marmot genome paper is published in iScience. [January 2019] [<a href="https://www.cell.com/iscience/fulltext/S2589-0042(18)30224-4?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2589004218302244%3Fshowall%3Dtrue" target="_blank">Full Text</a>]
+						</li>
+						<li><i class="fa fa-chevron-circle-right"></i>
+							Himalayan marmot genome is publicly accessible. [September 2018]
+						</li>
+						<li><i class="fa fa-chevron-circle-right"></i>
+							Alpine marmot and Yellow-bellied marmot genome are publicly accessible. [December 2017]
+						</li>
+						<li><i class="fa fa-chevron-circle-right"></i>
+							iMarmot Database is available online. [April 2017]
+						</li>
+
+
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row" style="margin: 15px 0px">
+		<div class="page-footer" style="background: transparent;
+			font-size: 13px;
+			padding: 12px 0px;">
+			<div class="col-md-9">
+				<div style="text-align: center;
+					color: #555">
+					Copyright © 2018 Laboratory Animal Center, Xi’an Jiaotong University Health Science Center. All Rights Reserved.
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+
+	</script>
+}

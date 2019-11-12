@@ -1,0 +1,1030 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("World Marmot-MARDB") {
+	<style>
+			.tdBold {
+				font-weight: bold;
+			}
+
+			.mySpan {
+				font-weight: bold;
+			}
+
+			.bs-docs-sidebar.affix {
+				position: fixed;
+				top: 20px;
+			}
+
+			ul.nav-tabs {
+				width: 140px;
+				margin-top: 20px;
+				border-radius: 4px;
+				border: 1px solid #ddd;
+				box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+			}
+
+			ul.nav-tabs li {
+				margin: 0;
+				border-top: 1px solid #ddd;
+			}
+
+			ul.nav-tabs li:first-child {
+				border-top: none;
+			}
+
+			ul.nav-tabs li a {
+				margin: 0;
+				padding: 8px 16px;
+				border-radius: 0;
+			}
+
+			ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+				color: #fff;
+				background: #0088cc;
+				border: 1px solid #0088cc;
+			}
+
+			ul.nav-tabs li:first-child a {
+				border-radius: 4px 4px 0 0;
+			}
+
+			ul.nav-tabs li:last-child a {
+				border-radius: 0 0 4px 4px;
+			}
+			.affix {
+				top: 20px;
+			}
+
+		hr{
+			font-weight: bold;
+		}
+
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">World Marmot</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-3" id="myScrollspy">
+			<div class="bs-docs-sidebar affix-top" role="complementary">
+				<ul class="nav bs-docs-sidenav" id="myNav">
+					<li class=""><a href="#alpine">1. Alpine marmot</a></li>
+					<li><a href="#himalayan">2. Himalayan marmot</a></li>
+					<li><a href="#long-tailed">3. Long-tailed marmot</a></li>
+					<li><a href="#gray">4. Gray marmot</a></li>
+					<li><a href="#mongolia">5. Mongolia marmot</a></li>
+					<li><a href="#alaska">6. Alaska marmot</a></li>
+					<li><a href="#woodchuck">7. Woodchuck</a></li>
+					<li><a href="#olympic">8. Olympic marmot</a></li>
+					<li><a href="#yellow">9. Yellow-bellied marmot</a></li>
+					<li><a href="#vancouver">10. Vancouver Island marmot</a></li>
+					<li><a href="#hoary">11. Hoary marmot</a></li>
+					<li><a href="#menzbier">12. Menzbier's marmot</a></li>
+					<li><a href="#black">13. Black-capped marmot</a></li>
+					<li><a href="#bobak">14. Bobak marmot</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-xs-9" style="line-height: 2em">
+			<div>
+				<div class="row" id="alpine">
+					<div class="col-xs-5">
+						<div style="margin-top: 5px">
+							<span class="mySpan">Common name</span>: Alpine marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:  <i>Marmota marmota</i>
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Extended family
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Life expectancy</span>
+							: 15 to 18 years.
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							2 to 3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							2 to 3 years
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.11.png")">
+					</div>
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Size</span>
+					: Their body size reach between 42 and 54 cm in length, not including the tail, which measures between 13 to 16 cm on average.
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Location</span>:
+					The Alpine marmot lives at heights between 800 and 3,200 meters throughout the European Alps, including the alpine areas of France, Italy, Switzerland, Germany, Slovenia and Austria.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Habitat</span>:
+					The Alpine marmots prefer alpine meadows and high-altitude pastures, where colonies live in deep burrow systems situated in alluvial soil or rocky areas.
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Population status</span>:
+					Stable, LC
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Zoonosis</span>:
+					Anoplocephalid tapeworm
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Hibernation time</span>:
+					They spend up to 9 months per year in hibernation.
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Picture sources</span>:
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=178597">
+						https://commons.wikimedia.org/w/index.php?curid=178597</a>
+				</div>
+
+			</div>
+			<div>
+				<hr id="himalayan">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Himalayan marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i>Marmota himalayana</i>
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Life expectancy</span>:
+							15 to 20 years
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Extended family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.1695.png")">
+					</div>
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Size</span>:
+					Males are 47 to 67 cm long and females are 45 to 52 cm long. Males weigh about 6kg and females about 5kg.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Location</span>:
+					Himalayan marmots can survive at altitudes up to 5,000 meters in the Himalayan regions of India, Nepal, and Pakistan and on the Qinghai-Tibetan Plateau of China.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Habitat</span>:
+					High mountain meadows
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Population status</span>:
+					Unknown, LC
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Zoonosis</span>:
+					Plague, Marmota Himalayana hepatitis A virus (MHHAV), Tick-borne encephalitis virus (TBEV), Bocaparvovirus, pathogenic E. coli
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Hibernation time</span>:
+					8 months
+				</div>
+
+			</div>
+			<div>
+				<hr id="long-tailed">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Long-tailed marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota caudata</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							3 to 4 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							3 to 4 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Extended family
+						</div>
+
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.11223.png")">
+					</div>
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Size</span>:
+					Body weight ranges from 4kg to 5kg, body length ranges from 448mm to 530mm.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Location</span>:
+					The long-tailed marmot occurs in Afghanistan, Kyrgyzstan, Pakistan, Tajikistan, India and China.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Habitat</span>:
+					High mountain meadows
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Population status</span>:
+					Unknown, LC
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Zoonosis</span>:
+					Plague
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Hibernation time</span>:
+					7 to 8 months
+				</div>
+
+			</div>
+			<div>
+				<hr id="gray">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Marmota baibacina
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota caudata</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							More than 3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							2 to 4 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Extended family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.11553.png")">
+					</div>
+				</div>
+
+
+				<div class="myDiv">
+					<span class="mySpan">Size</span>:
+					The body weight ranges from 4 to 6.5 kg. The total body length ranges from about 60 to 80 cm which includes the 13 to 15 cm long tail.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Location</span>:
+					Their distribution extends from the Altai mountains of southwestern Siberia (Tuva, Russia), western Mongolia, northwestern China (Xinjiang), and eastern Kazakhstan, into the Tien Shan mountains of northwestern China, Kyrgyzstan, and southeastern Kazakhstan.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Habitat</span>:
+					They occur in elevations from 150 to 4000 m of alpine meadow, alpine forest and forest steppe and prefer mild to moderate well-draining slopes with suitable soil for burrowing.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Population status</span>:
+					Unknown, LC
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Zoonosis</span>:
+					Plague
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Hibernation time</span>:
+					7 to 8 months starting in fall and ending in May.
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Picture sources</span>:
+					<a href="https://commons.wikimedia.org/w/index.php?curid=9549763" target="_blank">
+						https://commons.wikimedia.org/w/index.php?curid=9549763</a>
+				</div>
+			</div>
+			<div>
+				<hr id="mongolia">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Mongolia marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota sibirica</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							More than 3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at ﬁrst reproduction</span>:
+							2 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Extended family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.12069.png")">
+					</div>
+				</div>
+
+
+				<div class="myDiv">
+					<span class="mySpan">Size</span>:
+					Adults are 36 to 50 cm in length, which not including a short tail measuring 11 to 12 cm.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Location</span>:
+					It is found in China (Inner Mongolia and Heilongjiang), northern and western Mongolia, and Russia (southwest Siberia, Tuva, Transbaikalia). The range of Mongolia marmot overlaps with that of the Gray marmot.
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Habitat</span>:
+					Alpine meadows, permafrost, xeric habitat
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Endangered</span>:
+					Decreasing, EN
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Zoonosis</span>:
+					Plague
+				</div>
+				<div class="myDiv">
+					<span class="mySpan">Hibernation time</span>:
+					About 6 months
+				</div>
+
+				<div class="myDiv">
+					<span class="mySpan">Picture sources</span>:
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=7566004">
+						https://commons.wikimedia.org/w/index.php?curid=7566004</a>
+				</div>
+
+			</div>
+			<div>
+				<hr id="alaska">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Alaska marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota broweri</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							More than 3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							Unknown
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Extended family
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Zoonosis</span>:
+							Plague
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Hibernation time</span>:
+							8 months
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.12674.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Alaska marmots range from about 54 to 65 cm in length and 2.5 to 4 kg in weight.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						The Alaska marmot is Nearctic and exists in the mountains that lie north of the Yukon and Porcupine rivers in central and northern Alaska.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Alpine meadows and permafrost
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Endangered</span>:
+						Stable, LC
+					</div>
+
+
+				</div>
+			</div>
+			<div>
+				<hr id="woodchuck">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Woodchuck
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota monax</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							0 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							1 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Solitary
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Endangered</span>:
+							Stable, LC
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.13095.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Adults are 40 to 50 cm in length, including a 15 cm tail. Woodchuck weight ranges from 2 to 6 kg.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Life expectancy</span>:
+						Woodchuck is reported to live up to 14 years in captivity.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						It is found through much of the eastern United States across Canada and into Alaska.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						The Woodchuck is a lowland creature, living in rocky and mountainous areas.
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Woodchuck hepatitis A virus (WHHAV), Woodchuck hepatitis B virus (WHHBV), Woodchuck hepatitis delta virus (WHHDV), Powassan virus (POWV), and Toxoplasmosis
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						In most areas, Woodchuck hibernates from October to March or April, but in more temperate areas, they may hibernate as little as three months.
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Picture sources</span>:
+						<a target="_blank" href="  https://commons.wikimedia.org/w/index.php?curid=46548677">
+							https://commons.wikimedia.org/w/index.php?curid=46548677</a>
+					</div>
+				</div>
+			</div>
+			<div>
+				<hr id="olympic">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Olympic marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota olympus</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							2 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at ﬁrst reproduction</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.13607.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						The Olympic marmot is about the size of a domestic cat. Adults weigh from 3.1 to 11 kg and are from 67 to 75 cm in length. This species has the most pronounced sexual dimorphism found in marmots, with adult males weighing on average 9.3 kg and adult females weighing 7.1 kg.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						The Olympic marmot occurs only in the U.S. state of Washington, on the middle elevations of the Olympic Peninsula.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Olympic marmots inhabit lush sub-alpine and alpine meadows, fields, and montane scree slopes.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Endangered</span>:
+						Decreasing, LC
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Not reported
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						7 to 8 months
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Picture sources</span>:
+						<a target="_blank" href="  https://commons.wikimedia.org/w/index.php?curid=36778054">
+							https://commons.wikimedia.org/w/index.php?curid=36778054</a>
+					</div>
+				</div>
+
+			</div>
+			<div>
+				<hr id="yellow">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Yellow-bellied marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota flaviventris</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							2 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.14070.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Adult males typically weigh between 3 to 5 kg and adult females typically weigh between 1.6 to 4 kg. They measure from 47 to 68 cm in length with a short tail measuring 13 to 21 cm.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						Yellow-bellied marmot is native to mountainous regions of southwestern Canada and western United States, typically living above 2,000 m.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						They are found in valleys, meadows, and foothills.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Endangered</span>:
+						Stable, LC
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Not reported
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						8 months
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Picture sources</span>:
+						<a target="_blank" href="  https://commons.wikimedia.org/w/index.php?curid=10871875">
+							https://commons.wikimedia.org/w/index.php?curid=10871875</a>
+					</div>
+				</div>
+
+			</div>
+			<div>
+				<hr id="vancouver">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Vancouver Island marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota vancouverensis</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							2 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							4 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Endangered</span>:
+							Decreasing, CR
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.14832.png")">
+					</div>
+				</div>
+
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						An adult Vancouver Island marmot typically weighs between 3 to 7 kg and measures 56 to 70 cm including its tail.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						The Vancouver Island marmot naturally occurs only in the high mountains of Vancouver Island in British Columbia.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Subalpine meadows
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Not reported
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						Wild Vancouver Island marmots hibernate for about 7 months per year.
+					</div>
+
+				</div>
+
+			</div>
+			<div>
+				<hr id="hoary">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Hoary marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota caligata</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							2 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Endangered</span>:
+							Stable, LC
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.15333.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Adults range from 62 to 82 cm in total length including a 17 to 25 cm tail, and from an average of 3.75 to 7 kg in weight.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						Hoary marmots occur from southern Washington and central Idaho north, and are found through much of Alaska south of the Yukon River.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Hoary marmots live above the tree line, at elevations of 2,500 m in rocky terrain or alpine meadows and Krummholz forest patches.
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Not reported
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						8 months
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Picture sources</span>:
+						<a target="_blank" href="  https://www.flickr.com/photos/okapix/3049144214/sizes/o/in/photostream/">
+							https://www.flickr.com/photos/okapix/3049144214/sizes/o/in/photostream/</a>
+					</div>
+				</div>
+
+			</div>
+			<div>
+				<hr id="menzbier">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Menzbier's marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota menzbieri</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							Unknown
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							1 to 7 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.16049.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Adults are about 45 cm in length and 2.4 kg in weight on average.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						It is found in Kazakhstan, Kyrgyzstan and Uzbekistan.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Temperate grassland at the elevation range from 2,000 to 3,400 m.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Endangered</span>:
+						Decreasing, VU
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Not reported
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						The Menzbier's marmots start hibernation at August or September and end hibernation depending on the time of snow-melting.
+					</div>
+
+				</div>
+
+			</div>
+			<div>
+				<hr id="black">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Black-capped marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota camtschatica</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							More than 3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.16528.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Adults range from 45 to 51 cm in length and about 2.0 to 7.5 kg in weight.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						It is endemic to Russia.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Alpine meadows and permafrost
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Endangered</span>:
+						Stable, LC
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Plague and Cestodes
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						8 to 9 months per year
+					</div>
+
+				</div>
+
+			</div>
+			<div>
+				<hr id="bobak">
+				<div class="row" >
+					<div class="col-xs-5">
+						<div class="myDiv" style="margin-top: 5px">
+							<span class="mySpan">Common name</span>:
+							Bobak marmot
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Latin name</span>:
+							<i> Marmota bobak</i>
+						</div>
+
+						<div class="myDiv">
+							<span class="mySpan">Age at dispersion</span>:
+							More than 3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Age at first reproduction</span>:
+							3 years
+						</div>
+						<div class="myDiv">
+							<span class="mySpan">Social system</span>:
+							Restricted family
+						</div>
+
+					</div>
+					<div class="col-xs-4">
+						<img src="@routes.Assets.at("images/附件5.16879.png")">
+					</div>
+				</div>
+
+				<div>
+
+					<div class="myDiv">
+						<span class="mySpan">Size</span>:
+						Adults range from 49 to 58 cm in length and about 7 to 10 kg in weight.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Life expectancy</span>:
+						15 to 20 years
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Location</span>:
+						The Bobak marmot is native to the steppes of Eastern Europe (primarily Ukraine and Russia) and Central Asia.
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Habitat</span>:
+						Steppe grassland
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Endangered</span>:
+						Stable, LC
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Zoonosis</span>:
+						Plague
+					</div>
+					<div class="myDiv">
+						<span class="mySpan">Hibernation time</span>:
+						3 to 6 months
+					</div>
+
+					<div class="myDiv">
+						<span class="mySpan">Picture sources</span>:
+						<a target="_blank" href="  https://commons.wikimedia.org/w/index.php?curid=43650556">
+							https://commons.wikimedia.org/w/index.php?curid=43650556</a>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+	<script>
+			$(function () {
+
+				$('body').scrollspy({target: '#myScrollspy'})
+
+				$("#myNav").affix({
+					offset: {
+						top: 100
+					}
+				});
+
+
+			})
+
+	</script>
+}

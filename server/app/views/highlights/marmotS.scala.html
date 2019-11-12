@@ -1,0 +1,235 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("MarmotS-MARDB") {
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">MarmotS</h2>
+		</div>
+	</div>
+
+	<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+	data-toggle="table"
+	data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-multiple-search="true"
+	style="table-layout: fixed;
+		word-wrap: break-word"
+	>
+		<thead>
+			<tr>
+				<th>Image</th>
+				<th>Introduction</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=178597"
+					title="By François Trazzi. - François Trazzi., CC BY-SA 3.0">
+					<img src="@routes.Assets.at("images/附件5.11.png")">
+					</a>
+				</td>
+				<td>
+					<b>Alpine marmot</b><br>
+					<i>Marmota marmota</i><br>
+					Alpine marmots prefer alpine meadows and high-altitude pastures. The alpine marmot is sometimes considered the largest squirrel species. Its coat is a mixture of blonde, reddish and dark gray fur. If kept in captivity, alpine marmots can live up to 15–18 years. As the summer begins to end, alpine marmots will gather old stems in their burrows in order to serve as bedding for their impending hibernation, which can start as early as October.
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="@routes.Assets.at("images/附件5.1695.png")">
+				</td>
+				<td>
+					<b>Himalayan marmot</b><br>
+					<i>Marmota himalayana</i><br>
+					The Himalayan marmot inhabits alpine grasslands throughout the Himalayas and on the Tibetan Plateau. It has a dark chocolate-brown coat with contrasting yellow patches on its face and chest. It is a primary natural host of plague in China.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="@routes.Assets.at("images/附件5.11223.png")">
+				</td>
+				<td>
+					<b>Long-tailed marmot</b><br>
+					<i>Marmota caudata</i><br>
+					It occurs in mountainous regions of Central Asia at elevations from 3,200 to 4,850 m. Its typical habitat is rough grassland and alpine meadows, often among rocks where dwarf junipers grow. It is IUCN Red Listed as Least Concern. This marmot hibernates from about September to April or May.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=9549763"
+					title="By Alastair Rae - Own work, CC BY-SA 3.0">
+					<img src="@routes.Assets.at("images/附件5.11553.png")">
+					</a>
+				</td>
+				<td>
+					<b>Gray marmot</b><br>
+					<i>Marmota baibacina</i><br>
+					The gray marmot occurs in mountainous grasslands and shrub lands of central Asia, and is one of the 9 Eurasia species. They forage on sage bush in the spring, grasses and flowering plants in summer and fall. Gray marmots live in harsh environments with snowfall limiting food for a significant amount of time. Gray marmots hibernate for 7-8 months starting in fall and emerging in May.
+				</td>
+
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href=" https://commons.wikimedia.org/w/index.php?curid=7566004"
+					title="By Stéphane Magnenat - Own work, CC BY-SA 3.0">
+					<img src="@routes.Assets.at("images/附件5.12069.png")">
+					</a>
+				</td>
+				<td>
+					<b>Mongolia marmot</b><br>
+					<i>Marmota sibirica</i><br>
+					It is found in China, northern and western Mongolia, and Russia. The species was classified as endangered by the IUCN in 2008. Epizootics of the plague, which are the pneumonic form, have been considered to occur in Mongolia marmots in northeastern China and Mongolia.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="@routes.Assets.at("images/附件5.12674.png")">
+				</td>
+				<td>
+					<b>Alaska marmot</b><br>
+					<i>Marmota broweri</i><br>
+					Alaska marmot is found in the scree slopes of the Brooks Range, Alaska and its habitats include the terrestrial tundra and mountain biomes at elevations of about 1000 m to 1250 m. Alaska celebrates every February 2 as "Marmot Day," a holiday intended to predict the approach of spring. It is one of the longer hibernating marmots, being documented to do so up to eight months annually.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=46548677"
+					title="By Ladycamera - Own work, CC BY-SA 4.0">
+					<img src="@routes.Assets.at("images/附件5.13095.png")">
+					</a>
+
+				</td>
+				<td>
+					<b>Woodchuck</b><br>
+					<i>Marmota monax</i><br>
+					Woodchuck is found through much of the eastern United States across Canada and into Alaska. Its habitats typically include low elevation forests, small woodlots, fields, pastures and hedgerows. It is susceptible to woodchuck hepatitis virus infection, similar to human hepatitis B virus. Therefore, it is approved to be used in medical research on hepatitis B-induced liver cancer by FDA.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=36778054"
+					title="By Helen Rickard from West Midlands, UK - CC BY-SA 2.0">
+					<img src="@routes.Assets.at("images/附件5.13607.png")">
+					</a>
+
+				</td>
+				<td>
+					<b>Olympic marmot</b><br>
+					<i>Marmota olympus</i><br>
+					The Olympic marmot is native to the Olympic Mountains in the Olympic Peninsula of Washington state. The species is susceptible to climate change because of their sensitivity to changed habitats. So far, it is the second-rarest North American marmot. In 2009, this marmot was designated a state symbol of Washington
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=10871875"
+					title="By Alan Vernon - originally posted to Flickr as Young Yellow - bellied Marmot suckling., CC BY 2.0">
+					<img src="@routes.Assets.at("images/附件5.14070.png")">
+					</a>
+
+				</td>
+				<td>
+					<b>Yellow-bellied marmot</b><br>
+					<i>Marmota flaviventris</i><br>
+					Yellow-bellied marmot is native to mountainous regions of southwestern Canada and western United States, typically living above 2,000 m. Due to the bright yellow fur on their belly, sides of the neck, and throat, they get their scientific and common names. They live in burrows in colonies of up to twenty individuals with a single dominant male.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="@routes.Assets.at("images/附件5.14832.png")">
+
+				</td>
+				<td>
+					<b>Vancouver Island marmot</b><br>
+					<i>Marmota vancouverensis</i><br>
+					Vancouver Island marmot, as its name suggests, is geographically restricted to Vancouver Island, and apparently evolved rapidly since retreat of the Cordilleran glaciation some 10,000 years before present. It remains one of the world's rarest mammals and is typical of alpine-dwelling marmots in general form and physiology. This species can be easily distinguished from other marmots by its rich, chocolate brown fur and contrasting white patches.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href="https://www.flickr.com/photos/okapix/3049144214/sizes/o/in/photostream/"
+					title="By Eemeli Haverinen - CC BY-SA2.0">
+					<img src="@routes.Assets.at("images/附件5.15333.png")">
+					</a>
+
+				</td>
+				<td>
+					<b>Hoary marmot</b><br>
+					<i>Marmota caligata</i><br>
+					The Hoary marmot is distributed in western North America from Alaska and Canada south to Washington and Montana and is found at elevations ranging from sea level to 2,500 m. It prefers alpine and subalpine boulder piles and talus slopes surrounded by meadows. The populations of Montague Island and Glacier Bay are of conservation concern by the State of Alaska.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="@routes.Assets.at("images/附件5.16049.png")">
+				</td>
+				<td>
+					<b>Menzbier's marmot</b><br>
+					<i>Marmota menzbieri</i><br>
+					The Menzbier's marmot is found in Kazakhstan, Kyrgyzstan and Uzbekistan. Its natural habitat is temperate grassland. It is threatened by habitat loss. Its name commemorates Russian zoologist Mikhail Aleksandrovich Menzbier.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<img src="@routes.Assets.at("images/附件5.16528.png")">
+				</td>
+				<td>
+					<b>Marmota camtschatica</b><br>
+					<i>Black-capped marmot</i><br>
+					Black-capped marmots have physiological and behavioral adaptations that enable them to survive in cold environments with permafrost. It has a higher percentage of their body mass consisting of subcutaneous and perivisceral fat. Hibernation in Black-capped marmots usually lasts for 8-9 months of the year.
+
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=43650556"
+					title="By Ejensyd - Own work, CC BY-SA 3.0">
+					<img src="@routes.Assets.at("images/附件5.16879.png")">
+					</a>
+				</td>
+				<td>
+
+					<b>Marmota bobak</b><br>
+					<i>Bobak marmot</i><br>
+					The bobak marmot is native to the steppes of Eastern Europe (primarily Ukraine and Russia) and Central Asia. It prospers on rolling grasslands and on the edge of cultivated fields. A population of Marmota bobaks living in the Ural Mountains is believed to have served as a reservoir host for the bubonic plague epidemic that struck western Russia at the end of the 19th century.
+
+				</td>
+			</tr>
+
+
+		</tbody>
+	</table>
+
+	<script>
+			$(function () {
+
+
+			})
+
+	</script>
+
+
+}

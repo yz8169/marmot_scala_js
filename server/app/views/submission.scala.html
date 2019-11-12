@@ -1,0 +1,69 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Submit-MARDB") {
+
+	<style>
+			.paragraph {
+				font-size: 15px;
+				line-height: 1.8em;
+			}
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">
+				Submit
+			</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="paragraph" style="font-size: 15px;">
+				We encourage the users of iMarmot database to share their own data with us. Generally, four types of data, including biological information, clone sequence, microarray and raw sequence data, are accepted. The users could send their data to
+				<a href="mailto:liuenqi@@xjtu.edu.cn">
+					liuenqi@@xjtu.edu.cn
+				</a>
+				. Please refer to the restrictions below on the file formats and sizes of each data type.
+			</p>
+		</div>
+
+		<div class="col-sm-12">
+			<p class="paragraph">
+				Biological information: physiology and biochemical data, photos or videos of marmot species. An instruction text along with the photos and videos would be given to indicate the marmot species, age, locus, etc. The physiology and biochemical data should be given in format of world or excel.
+			</p>
+		</div>
+
+		<div class="col-sm-12">
+			<p class="paragraph">
+				Clone sequence: BAC clone sequences of marmots in fasta format are needed to correct the genome assemble errors.
+			</p>
+		</div>
+
+		<div class="col-sm-12">
+			<p class="paragraph">
+				Raw microarray data: Please refer to the link: <br>
+				<a href="https://www.ebi.ac.uk/fg/annotare/help/accepted_raw_ma_file_formats.html"
+				target="_blank">https://www.ebi.ac.uk/fg/annotare/help/accepted_raw_ma_file_formats.html</a>
+					for the accepted raw microarray file formats. For large data size, please contact us at <a href="mailto:liuenqi@@xjtu.edu.cn">liuenqi@@xjtu.edu.cn</a> for data transfer.
+			</p>
+		</div>
+
+		<div class="col-sm-12">
+			<p class="paragraph">
+				Raw sequence data: RNA-seq and whole genome sequence data should be in fastq format. Please contact us at <a href="mailto:liuenqi@@xjtu.edu.cn">
+				liuenqi@@xjtu.edu.cn</a> for data transfer due to the large volume of raw sequence data.
+			</p>
+		</div>
+
+	</div>
+
+	<script>
+			$(function () {
+			})
+
+	</script>
+
+}

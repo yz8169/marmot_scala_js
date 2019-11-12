@@ -1,0 +1,35 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Hibernators-MARDB") {
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Project information of hibernators</h2>
+		</div>
+	</div>
+
+	<div class="paragraph" style="font-weight: bold;
+		font-size: 15px;">
+		The physiology of most marmots is highly adapted to cope with the harsh environment by hibernating. We have collected the microarray and RNA-Seq data of several mammal hibernators. By using the imbedded tools, users could easily analyzed and visualized the gene expression profiles. Currently, 14 projects and 307 samples, encompassing diverse tissues, were collected from NCBI.
+	</div>
+
+	<div class="table-responsive" id="tableContent">
+		<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+		data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-multiple-search="true"
+		>
+		</table>
+
+	</div>
+
+
+	<script>
+			$(function () {
+				HighLights.refreshHibernators
+
+			})
+
+	</script>
+
+
+}

@@ -1,0 +1,245 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("How to-MARDB") {
+	<style>
+			.tdBold {
+				font-weight: bold;
+			}
+
+			.mySpan {
+				font-weight: bold;
+			}
+
+			.bs-docs-sidebar.affix {
+				position: fixed;
+				top: 20px;
+			}
+
+			ul.nav-tabs {
+				width: 140px;
+				margin-top: 20px;
+				border-radius: 4px;
+				border: 1px solid #ddd;
+				box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+			}
+
+			ul.nav-tabs li {
+				margin: 0;
+				border-top: 1px solid #ddd;
+			}
+
+			ul.nav-tabs li:first-child {
+				border-top: none;
+			}
+
+			ul.nav-tabs li a {
+				margin: 0;
+				padding: 8px 16px;
+				border-radius: 0;
+			}
+
+			ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+				color: #fff;
+				background: #0088cc;
+				border: 1px solid #0088cc;
+			}
+
+			ul.nav-tabs li:first-child a {
+				border-radius: 4px 4px 0 0;
+			}
+
+			ul.nav-tabs li:last-child a {
+				border-radius: 0 0 4px 4px;
+			}
+
+			.affix {
+				top: 20px;
+			}
+
+			hr {
+				font-weight: bold;
+			}
+
+			img {
+				max-width: 100%;
+			}
+
+			.bold {
+				font-weight: bold;
+			}
+
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">How to</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-3" id="myScrollspy">
+			<div class="bs-docs-sidebar affix-top" role="complementary">
+				<ul class="nav bs-docs-sidenav" id="myNav">
+					<li class=""><a href="#1">1.How to search</a></li>
+					<li><a href="#2">2. How to use the genome browser</a></li>
+					<li><a href="#3">3.  How to use the online tools</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-xs-9" style="line-height: 2em">
+			<div class="row" id="1">
+				<div class="col-xs-12">
+					<p class="paragraph bold">
+						1.How to search
+					</p>
+					<p class="paragraph">
+						A. Quick search<br>
+						The quick search tool that users get gene information quickly through gene name on the home page.<br>
+						<img src="@routes.Assets.at("images/h_home.png")">
+					</p>
+					<p class="paragraph">
+						B. Gene information search<br>
+						On the search page, we provided a “one-stop” retrieval system for viewing gene information by gene ID, gene name or gene locus.<br>
+						Step 1: Type the gene ID, gene name or gene locus<br>
+						<img src="@routes.Assets.at("images/h_geneId.png")">
+						Step 2: select the gene you want<br>
+						<img src="@routes.Assets.at("images/h_select.png")">
+						Step 3: View the gene information<br>
+						In the gene detail information page, users would view the gene basic information, functional classification, tissue-specific expression, syntenic blocks, a graphic gene structure, etc. Meanwhile, the graphic gene structure and synteny blocks are linked to the genome browse and synteny block page, respectively.<br>
+						<img src="@routes.Assets.at("images/h_detail.png")">
+						<img src="@routes.Assets.at("images/h_seq.png")">
+						<img src="@routes.Assets.at("images/h_gene.png")">
+						C. Function classification retrieval<br>
+						Uses would browse genes by GO term, KEGG pathway.<br>
+						Step1: Select the marmot species and KEGG/GO term.<br>
+						<img src="@routes.Assets.at("images/h_go.png")">
+						Step2: Type the keyword to search the KEGG/GO terms or select the GO/KEGG term that you want.<br>
+						<img src="@routes.Assets.at("images/h_kegg.png")">
+						By using Browse, database user could also view the synteny blocks between Himalayan marmot and other two marmots: Alpine marmot and Yellow-bellied marmot.<br>
+						Step1: Select the comparison that you want.<br>
+						<img src="@routes.Assets.at("images/h_block.png")">
+						Step2: Select the synteny block that you want.<br>
+						<img src="@routes.Assets.at("images/h_block_table.png")">
+						Step3: View the block information. We integrated a visualized synteny block to show the gene syntenic relationship.<br>
+						<img src="@routes.Assets.at("images/h_display.png")">
+						<img src="@routes.Assets.at("images/h_visual.png")">
+					</p>
+				</div>
+			</div>
+			<div class="row" id="2">
+				<div class="col-xs-12">
+					<p class="paragraph bold">
+						2. How to use the genome browser
+					</p>
+					<p class="paragraph">
+						JBrowse is a popular genome browser for displaying annotations on genomes by combining the database and interactive web pages. By JBrowse, the users could view the gene structures of three marmots and genomic variations of another five marmots. In addition, we built a combination between JBrowse and gene retrieval system.<br>
+						Step1: Select the tracks that you want to display.<br>
+						<img src="@routes.Assets.at("images/h_track.png")"><br>
+						Step2: Type the gene ID or scaffold region to view the gene model and the genomic variations within this gene in other marmots.<br>
+						<img src="@routes.Assets.at("images/h_genome.png")">
+						Step3: Click the gene ID and view the gene basic information and sequence.<br>
+						<img src="@routes.Assets.at("images/h_mRNA.png")">
+					</p>
+				</div>
+			</div>
+
+			<div class="row" id="3">
+				<div class="col-xs-12">
+					<p class="paragraph bold">
+						3.  How to use the online tools
+					</p>
+					<p class="paragraph">
+						A. Enrichment analysis pipeline. By using the enrichment analysis pipeline, we are able to identify significantly enriched GO/KEGG terms among the given list of genes using accurate statistical methods.<br>
+						Step1: Select the method and background species, paste or upload gene IDs, and set the P-value cutoff.<br>
+						<img src="@routes.Assets.at("images/h_enrich.png")">
+						Step2: Choose the items that you want to show and view the results.<br>
+						<img src="@routes.Assets.at("images/h_item.png")">
+					</p>
+					<p class="paragraph">
+						B. Correlation heatmap uses colored cells, typically in a monochromatic scale, to show a 2D correlation matrix between two discrete dimensions or event types. This enables the users to quickly identify incidence patterns, and to recognize anomalies.<br>
+						Step1: Select the sample name or upload data as the example file<br>
+						<img src="@routes.Assets.at("images/h_cor.png")">
+						Step2: View and download the analysis result.<br>
+						<img src="@routes.Assets.at("images/h_heatmap.png")">
+					</p>
+					<p class="paragraph">
+						C. PCA (Principal component analysis) is a statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables.<br>
+						Step1: Select the sample name or upload data as the example file<br>
+						<img src="@routes.Assets.at("images/h_pca.png")">
+						Step2: View and download the result that you want<br>
+						<img src="@routes.Assets.at("images/h_pca_image.png")">
+					</p>
+					<p class="paragraph">
+						D. HCluster (Hierarchical Cluster analysis) is an algorithm that groups similar objects into groups called clusters. The endpoint is a set of clusters, where each cluster is distinct from each other cluster, and the objects within each cluster are broadly similar to each other.<br>
+						Step1: Select the sample name or upload data as the example file<br>
+						<img src="@routes.Assets.at("images/h_hcluster.png")">
+						Step2: View and download the result that you want<br>
+						<img src="@routes.Assets.at("images/h_hclust_image.png")">
+					</p>
+					<p class="paragraph">
+						E. Blast<br>
+						Blast (Basic local alignment search tool) finds regions of local similarity between sequences (Altschul et al. 1997). The program compares nucleotide or protein sequences to sequence databases and calculates the statistical significance of the matches. BLAST can be used to infer functional and evolutionary relationships between sequences as well as to help identify members of gene families.<br>
+						Step1: Select the program and database, paste or upload sequences, then set up the parameters.<br>
+						<img src="@routes.Assets.at("images/h_blast.png")">
+						Step2: View the blast results.<br>
+						<img src="@routes.Assets.at("images/h_description.png")">
+					</p>
+					<p class="paragraph">
+						F. Muscle<br>
+						Muscle (Multiple sequence comparison by log-expectation), an accurate multiple sequence alignment tool, especially good with proteins, is claimed to achieve better average accuracy and better speed than ClustalW or T-Coffee, depending on the options (Edgar 2004).<br>
+						Step1: Paste or upload the sequences in fasta format as example file and select the output format<br>
+						<img src="@routes.Assets.at("images/h_muscle.png")">
+						Step2: View and download the result that you want.<br>
+						<img src="@routes.Assets.at("images/h_result.png")">
+					</p>
+					<p class="paragraph">
+						G. Lastz<br>
+						Lastz (Large-scale genome alignment tool) is a fast and powerful alignment tool for the pairwise alignment of genomic DNA sequence. LASTZ was designed with large-scale genomic analysis and can efficiently align chromosomal or genomic sequences millions of nucleotides in length. It identifies orthologous regions between genomic sequences on a massive scale using a methodology that ignores the coding-region bias.<br>
+						Step1: Paste or upload the target and query sequences in fasta format as example file<br>
+						<img src="@routes.Assets.at("images/h_lastz.png")">
+						Step2: View and download the Lastz results.<br>
+						<img src="@routes.Assets.at("images/h_lastz_result.png")">
+						<img src="@routes.Assets.at("images/h_lastz_image.png")">
+						<img src="@routes.Assets.at("images/h_lastz_image_2.png")">
+					</p>
+					<p class="paragraph">
+						H. GeneWise<br>
+						GeneWise is a Pairwise Sequence Alignment tool and compares a protein sequence to a genomic DNA sequence, allowing for introns and frames-shifting error. It provides highly accurate and sensitive predictions of gene structures.<br>
+						Step1: Paste or upload the protein and corresponding genomic DNA sequences in fasta format as the example.<br>
+						Step2: Set up the parameters<br>
+						<img src="@routes.Assets.at("images/h_geneWise.png")">
+						Step3: View and download the result<br>
+						<img src="@routes.Assets.at("images/h_geneWise_result.png")">
+					</p>
+					<p class="paragraph">
+						I. Sequences fetch
+						Sequences fetch can extract the sequence from Himalayan marmot genome by scaffold locus.<br>
+						Step1: Type the scaffold region and then copy the corresponding sequence.<br>
+						<img src="@routes.Assets.at("images/h_seq_fetch.png")">
+					</p>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<script>
+			$(function () {
+
+				$('body').scrollspy({target: '#myScrollspy'})
+
+				$("#myNav").affix({
+					offset: {
+						top: 100
+					}
+				});
+
+
+			})
+
+	</script>
+}

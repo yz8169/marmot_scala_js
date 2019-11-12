@@ -1,0 +1,42 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("About us-MARDB") {
+
+	<style>
+			.paragraph {
+				font-size: 15px;
+				line-height: 1.8em;
+			}
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">
+				About us
+			</h2>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12" >
+			<img src="@routes.Assets.at("images/about.png")" >
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="paragraph">
+				The iMarmot database is developed and maintained by the Laboratory Animal Center of Xi’an Jiaotong University Health Science Center. Marmots are considered as a potential animal model in research fields of energy metabolism, circadian rhythms, high-altitude sickness, etc. To accelerate the process of standardization marmots as laboratory animals, we firstly de novo assembled the genome sequence of Himalayan marmot. Based on the whole genome sequence, we further explored the phylogenetic relationship among marmot species, the high-altitude adaptation mechanism, the metabolic regulation and immune response to plague infection. In future, we would like to establish a broader cooperation with all the research communities through the platform of iMarmot.            </p>
+		</div>
+
+	</div>
+
+	<script>
+			$(function () {
+			})
+
+	</script>
+
+}

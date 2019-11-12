@@ -1,0 +1,297 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+	@main("GO Enrich-MARDB") {
+
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<h2 class="page-heading"
+				style="text-align: left;
+					border-bottom: 5px solid #e9f3f4">GO Enrich</h2>
+			</div>
+		</div>
+
+		<form class="registration-form form-horizontal" id="form"
+		accept-charset="UTF-8" method="post">
+			<div class="form-group" id="queryContent">
+				<label class="control-label col-sm-2">Enter gene id:</label>
+				<div class="col-sm-8">
+					<textarea name="geneId" id="geneId" class="form-control" rows="5"></textarea>
+					<span class="help-block">e.g.,&nbsp;<a href="#"><em id="egGeneId">
+						Mar00001,Mar00004,Mar00008</em></a></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Or, upload file:</label>
+				<div class="col-sm-8">
+					<input id="input-1" type="file" class="file control-label" name="file" data-show-preview="false"
+					data-show-upload="false">
+					<span class="help-block"><a onclick="showExampleFile()"><em>
+						Example file</em></a></span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Background species:</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="database" onchange="change(this)">
+						<option value="human">Human</option>
+						<option value="rat">Rat</option>
+						<option value="mouse">mouse</option>
+						<option value="rabbit">rabbit</option>
+						<option value="marmot" selected>Himalayan marmot</option>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Test-wise alpha:</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="twa">
+						<option value="0.01">0.01</option>
+						<option value="0.05" selected="selected">0.05</option>
+					</select>
+				</div>
+
+				<label class="control-label col-sm-2">Experiment-wise alpha:</label>
+				<div class="col-sm-3">
+					<input class="form-control" name="ewa" id="ewa" value="0.05">
+				</div>
+
+			</div>
+
+			<div class="form-group">
+				<div class="actions col-sm-offset-2 col-sm-2">
+					<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+						Run</button>
+				</div>
+
+				<div class="actions  col-sm-2">
+					<button type="reset" class="btn btn-primary" style="width: 90%;">
+						Reset</button>
+				</div>
+			</div>
+
+		</form>
+
+		<div id="result" style="display: none">
+			<hr>
+
+			<label>Select the columns to display:</label>
+			<div id="checkbox" class="checkbox">
+
+			</div>
+			<div id="toolbar">
+					&nbsp;Keyword：
+			</div>
+
+			<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+			data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-search-align="left" data-multiple-search="true"
+			style="table-layout: fixed;
+				word-wrap: break-word"
+			>
+				<thead>
+					<tr>
+						<th data-field='id' data-sortable='true' title="id">id</th>
+						<th data-field='enrichment' data-sortable='true' title="enrichment">enrichment</th>
+						<th data-field='description' data-sortable='true' title="description">description</th>
+						<th data-field='ratio_in_study' data-sortable='true' title="ratio_in_study">ratio_in_study</th>
+						<th data-field='ratio_in_pop' data-sortable='true' title="ratio_in_pop">ratio_in_pop</th>
+						<th data-field='p_uncorrected' data-sortable='true' title="p_uncorrected">p_uncorrected</th>
+						<th data-field='p_bonferroni' data-sortable='true' title="p_bonferroni">p_bonferroni</th>
+						<th data-field='p_holm' data-sortable='true' title="p_holm">p_holm</th>
+						<th data-field='p_sidak' data-sortable='true' title="p_sidak">p_sidak</th>
+						<th data-field='p_fdr' data-sortable='true' title="p_fdr">p_fdr</th>
+						<th data-field='namespace' data-sortable='true' title="namespace">namespace</th>
+						<th data-field='genes_in_study' data-sortable='true' title="genes_in_study">genes_in_study</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+
+		<script>
+				$(function () {
+
+					function extractor(query) {
+						var result = /([^,]+)$/.exec(query);
+						if (result && result[1])
+							return result[1].trim();
+						return '';
+					}
+
+					$.ajax({
+						url: "@routes.SearchController.getAllGeneIds()",
+						async: false,
+						type: "get",
+						success: function (data) {
+							$('#geneId').typeahead({
+								source: data,
+								updater: function (item) {
+									return this.$element.val().replace(/[^,]*$/, '') + item + ',';
+								},
+								matcher: function (item) {
+									var tquery = extractor(this.query);
+									if (!tquery) return false;
+									return ~item.toLowerCase().indexOf(tquery.toLowerCase())
+								},
+								highlighter: function (item) {
+									var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+									return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+										return '<strong>' + match + '</strong>'
+									})
+								}
+							})
+						}
+					})
+
+					$('#egGeneId').click(function () {
+						var eg = $("#egGeneId").text().trim();
+						$('#geneId').val(eg);
+						$("#form").formValidation("revalidateField", "geneId")
+					});
+
+					var array = ["enrichment", "description", "ratio_in_study", "ratio_in_pop", "p_uncorrected",
+						"p_bonferroni", "p_holm", "p_sidak", "p_fdr", "namespace", "genes_in_study"]
+					var values = ["enrichment", "description", "ratio_in_study", "ratio_in_pop", "p_uncorrected",
+						"p_bonferroni", "p_holm", "p_sidak", "p_fdr", "namespace", "genes_in_study"]
+					var html = ""
+					$.each(array, function (n, value) {
+								html += "<label style='margin-right: 15px'>" +
+										"<input type='checkbox' checked='checked' value='" + values[n] + "' onclick=\"setColumns('" + values[n] + "')\">" + value +
+										"</label>"
+							}
+					);
+					$("#checkbox").append(html)
+					$('#table').bootstrapTable({});
+					var hiddenArray = ["enrichment", "p_fdr", "p_holm", "p_bonferroni", "p_sidak"]
+					$.each(hiddenArray, function (n, value) {
+								$('#table').bootstrapTable('hideColumn', value);
+								$("input:checkbox[value=" + value + "]").attr("checked", false)
+							}
+					);
+
+					formValidation()
+
+				})
+
+				function change(element) {
+					var value = $(element).find(">option:selected").val()
+					if(value=="human"){
+						$("#egGeneId").text("ENSG00000206474,ENSG00000221996,ENSG00000172208")
+					}else if(value=="rat"){
+						$("#egGeneId").text("ENSRNOG00000040300,ENSRNOG00000058808,ENSRNOG00000061316,ENSRNOG00000050129")
+					}else if(value=="mouse"){
+						$("#egGeneId").text("ENSMUSG00000000001,ENSMUSG00000000125,ENSMUSG00000000126,ENSMUSG00000000127")
+					}else if(value=="rabbit"){
+						$("#egGeneId").text("ENSOCUP00000009409.2,ENSOCUP00000002911.2,ENSOCUP00000002121.2,ENSOCUP00000026235.1")
+					}else{
+						$("#egGeneId").text("Mar00001,Mar00004,Mar00008")
+					}
+				}
+
+				function showExampleFile() {
+					var eg = $("#egGeneId").text().trim();
+					var content = eg.split(",").join("\n")
+					var w = window.open()
+					$(w.document.body).html("<pre>"+content+"</pre>")
+				}
+
+				function inputCheck() {
+					var file = $("#geneId").val()
+					var text = $("#input-1").val()
+					var b = true
+					if (!file && !text) {
+						b = false
+						swal("Error", "Please enter gene ID or upload file!", "error")
+					} else if (file && text) {
+						b = false
+						swal("Error", "Please either enter gene id into the box or upload a file, not both!", "error")
+					}
+					return b
+				}
+
+				function mySearch() {
+					var form = $("#form")
+					var fv = form.data("formValidation")
+					fv.validate()
+					if (fv.isValid() && inputCheck()) {
+						var form1 = new FormData($("#form")[0]);
+						var element = "<div id='content'><span id='info'>Running...</span>&nbsp;<img class='runningImage' src='@routes.Assets.at("images/running2.gif")' style='width: 30px;height: 20px;'></div>"
+						var index = layer.alert(element, {
+							skin: 'layui-layer-molv'
+							, closeBtn: 0,
+							title: "Info",
+							btn: []
+						});
+						$.ajax({
+							url: "@routes.ToolController.goEnrich()",
+							type: "post",
+							processData: false,
+							contentType: false,
+							data: form1,
+							success: function (data) {
+								layer.close(index)
+								if (data.valid == "false") {
+									swal("Error", data.message, "error")
+									$("#result").hide()
+								} else {
+									$('#table').bootstrapTable("load", data);
+									$("#result").show()
+								}
+							}
+						});
+					}
+				}
+
+
+				function formValidation() {
+					var infinityNumber = Number.MAX_VALUE
+					$('#form').formValidation({
+						framework: 'bootstrap',
+						icon: {
+							valid: 'glyphicon glyphicon-ok',
+							invalid: 'glyphicon glyphicon-remove',
+							validating: 'glyphicon glyphicon-refresh'
+						},
+						fields: {
+							ewa: {
+								validators: {
+									notEmpty: {
+										message: 'Experiment-wise alpha  is required!'
+									},
+									numeric: {
+										message: "Experiment-wise alpha  must be numeric!"
+									},
+									between: {
+										min: "0",
+										max: infinityNumber,
+										message: "Experiment-wise alpha must be more than 0!"
+									}
+								}
+							},
+							file: {
+								validators: {
+									file: {
+										extension: 'txt',
+										message: 'Gene Id file must is a txt file！'
+									}
+								}
+							},
+
+						}
+					});
+				}
+
+				function setColumns(value) {
+					var element = $("input:checkbox[value=" + value + "]")
+					if (element.is(":checked")) {
+						$('#table').bootstrapTable('showColumn', value);
+					} else {
+						$('#table').bootstrapTable('hideColumn', value);
+					}
+				}
+
+		</script>
+
+
+	}

@@ -1,0 +1,120 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET         /                                              controllers.AppController.toIndex
+
+GET         /MARDB/test/toTest                             controllers.TestController.toTest
+
+GET         /MARDB/app/toHelp                              controllers.AppController.toHelp
+GET         /MARDB/app/toHibernation                       controllers.AppController.toHibernation
+GET         /MARDB/app/toIntroduction                      controllers.AppController.toIntroduction
+GET         /MARDB/app/toSubmit                            controllers.AppController.toSubmit
+GET         /MARDB/app/toAbout                            controllers.AppController.toAbout
+GET         /MARDB/app/toFaq                            controllers.AppController.toFaq
+GET         /MARDB/app/toHow                            controllers.AppController.toHow
+
+GET         /MARDB/search/searchByGeneIdBefore             controllers.SearchController.searchByGeneIdBefore
+GET         /MARDB/search/getAllGeneIds                    controllers.SearchController.getAllGeneIds
+POST        /MARDB/search/searchByGeneId                   controllers.SearchController.searchByGeneId
+GET         /MARDB/search/getDetailInfo                    controllers.SearchController.getDetailInfo
+GET         /MARDB/search/boxPlotByGeneId                  controllers.SearchController.boxPlotByGeneId
+GET         /MARDB/search/searchByRegionBefore             controllers.SearchController.searchByRegionBefore
+GET         /MARDB/search/getAllChrs                       controllers.SearchController.getAllChrs
+POST        /MARDB/search/searchByRegion                   controllers.SearchController.searchByRegion
+GET         /MARDB/search/seqQueryBefore                   controllers.SearchController.seqQueryBefore
+POST        /MARDB/search/seqQuery                         controllers.SearchController.seqQuery
+GET         /MARDB/search/seqMultipleQueryBefore           controllers.SearchController.seqMultipleQueryBefore
+POST        /MARDB/search/seqMultipleQuery                 controllers.SearchController.seqMultipleQuery
+GET         /MARDB/search/browseBefore                     controllers.SearchController.browseBefore
+POST        /MARDB/search/getAllAnnos                      controllers.SearchController.getAllAnnos
+GET         /MARDB/search/getAllS2GeneIds                  controllers.SearchController.getAllS2GeneIds
+GET         /MARDB/search/searchByGeneNameBefore           controllers.SearchController.searchByGeneNameBefore
+GET         /MARDB/search/getAllGeneNames                  controllers.SearchController.getAllGeneNames
+POST        /MARDB/search/searchByGeneName                 controllers.SearchController.searchByGeneName
+GET         /MARDB/search/searchBefore                     controllers.SearchController.searchBefore
+GET         /MARDB/search/seqFetchBefore                   controllers.SearchController.seqFetchBefore
+GET         /MARDB/search/blastBefore                      controllers.SearchController.blastBefore
+GET         /MARDB/search/blastResult                      controllers.SearchController.blastResult
+POST        /MARDB/search/blastn                           controllers.SearchController.blastn
+POST        /MARDB/search/blastp                           controllers.SearchController.blastp
+POST        /MARDB/search/blastx                           controllers.SearchController.blastx
+POST        /MARDB/search/tblastn                          controllers.SearchController.tblastn
+POST        /MARDB/search/searchBefore1                    controllers.SearchController.searchBefore1
+GET         /MARDB/search/barPlot                          controllers.SearchController.barPlot
+POST        /MARDB/search/getAllGeneGo                     controllers.SearchController.getAllGeneGo
+POST        /MARDB/search/getAllGeneKegg                   controllers.SearchController.getAllGeneKegg
+POST        /MARDB/search/getAllOrthologs                  controllers.SearchController.getAllOrthologs
+POST        /MARDB/search/searchByKeyword                  controllers.SearchController.searchByKeyword
+POST        /MARDB/search/getDegInfo                       controllers.SearchController.getDegInfo
+GET         /MARDB/search/getBasicInfo                     controllers.SearchController.getBasicInfo
+
+GET         /MARDB/highlights/marmotSBefore                controllers.HighlightsController.marmotSBefore
+GET         /MARDB/highlights/hibernatorsBefore            controllers.HighlightsController.hibernatorsBefore
+GET         /MARDB/highlights/getAllHibernators            controllers.HighlightsController.getAllHibernators
+GET         /MARDB/highlights/plagueBefore                 controllers.HighlightsController.plagueBefore
+GET         /MARDB/highlights/getAllPlague                 controllers.HighlightsController.getAllPlague
+GET         /MARDB/highlights/expBefore                    controllers.HighlightsController.expBefore
+POST        /MARDB/highlights/getProjectInfo               controllers.HighlightsController.getProjectInfo
+POST        /MARDB/highlights/getProjectInfoV1             controllers.HighlightsController.getProjectInfoV1
+POST        /MARDB/highlights/expSearch                    controllers.HighlightsController.expSearch
+GET         /MARDB/highlights/getTissues                   controllers.HighlightsController.getTissues
+
+GET         /MARDB/browse/hibernateDiffGeneBefore          controllers.BrowseController.hibernateDiffGeneBefore
+GET         /MARDB/browse/getAllHibernationDiffGene        controllers.BrowseController.getAllHibernationDiffGene
+GET         /MARDB/browse/getAllChr                        controllers.BrowseController.getAllChr
+POST        /MARDB/browse/searchHDG                        controllers.BrowseController.searchHDG
+GET         /MARDB/browse/getAllTissue                     controllers.BrowseController.getAllTissue
+GET         /MARDB/browse/getAllPlatform                   controllers.BrowseController.getAllPlatform
+GET         /MARDB/browse/getAllSpecies                    controllers.BrowseController.getAllSpecies
+GET         /MARDB/browse/goBefore                         controllers.BrowseController.goBefore
+POST        /MARDB/browse/getGo                            controllers.BrowseController.getGo
+GET         /MARDB/browse/keggBefore                       controllers.BrowseController.keggBefore
+POST        /MARDB/browse/getAllKegg                       controllers.BrowseController.getAllKegg
+GET         /MARDB/browse/getKeggSpecies                   controllers.BrowseController.getKeggSpecies
+GET         /MARDB/browse/getGoInfo                        controllers.BrowseController.getGoInfo
+GET         /MARDB/browse/blockBefore                      controllers.BrowseController.blockBefore
+
+GET         /MARDB/tool/keggEnrichBefore                   controllers.ToolController.keggEnrichBefore
+POST        /MARDB/tool/keggEnrich                         controllers.ToolController.keggEnrich
+GET         /MARDB/tool/goEnrichBefore                     controllers.ToolController.goEnrichBefore
+POST        /MARDB/tool/goEnrich                           controllers.ToolController.goEnrich
+GET         /MARDB/tool/pCABefore                          controllers.ToolController.pCABefore
+GET         /MARDB/tool/getAllSampleNames                  controllers.ToolController.getAllSampleNames
+POST        /MARDB/tool/plotPCA                            controllers.ToolController.plotPCA
+GET         /MARDB/tool/hClusterBefore                     controllers.ToolController.hClusterBefore
+POST        /MARDB/tool/plotCluster                        controllers.ToolController.plotCluster
+GET         /MARDB/tool/cHeatMapBefore                     controllers.ToolController.cHeatMapBefore
+POST        /MARDB/tool/cHeatMap                           controllers.ToolController.cHeatMap
+GET         /MARDB/tool/geneWiseBefore                     controllers.ToolController.geneWiseBefore
+POST        /MARDB/tool/geneWise                           controllers.ToolController.geneWise
+GET         /MARDB/tool/muscleBefore                       controllers.ToolController.muscleBefore
+POST        /MARDB/tool/muscle                             controllers.ToolController.muscle
+POST        /MARDB/tool/downloadTree                       controllers.ToolController.downloadTree
+GET         /MARDB/tool/getExampleFile                     controllers.ToolController.getExampleFile
+GET         /MARDB/tool/mummerBefore                       controllers.ToolController.mummerBefore
+GET         /MARDB/tool/getExampleText                     controllers.ToolController.getExampleText
+POST        /MARDB/tool/mummer                             controllers.ToolController.mummer
+GET         /MARDB/tool/enrichBefore                       controllers.ToolController.enrichBefore
+
+GET         /MARDB/submit/toIndex                          controllers.SubmitController.toIndex
+POST        /MARDB/submit/sendMail                         controllers.SubmitController.sendMail
+
+GET         /MARDB/download/toIndex                        controllers.DownloadController.toIndex
+GET         /MARDB/download/download                       controllers.DownloadController.download
+GET         /MARDB/download/getGenomeData                  controllers.DownloadController.getGenomeData
+GET         /MARDB/download/downloadData                   controllers.DownloadController.downloadData
+
+GET         /MARDB/geneBlock/getGeneBlock                  controllers.GeneBlockController.getGeneBlock
+GET         /MARDB/geneBlock/blockInfoBefore               controllers.GeneBlockController.blockInfoBefore
+GET         /MARDB/geneBlock/blockInfo                     controllers.GeneBlockController.blockInfo
+GET         /MARDB/geneBlock/getKinds                      controllers.GeneBlockController.getKinds
+POST        /MARDB/geneBlock/getBlocks                     controllers.GeneBlockController.getBlocks
+
+GET         /MARDB/dataInsert/insert                       controllers.DataInsertController.insertOrthologs
+
+GET         /javascriptRoutes                              controllers.AppController.javascriptRoutes
+
+# Prefix must match `play.assets.urlPrefix`
+GET         /assets/*file                                  controllers.Assets.at(path="/public", file)
+

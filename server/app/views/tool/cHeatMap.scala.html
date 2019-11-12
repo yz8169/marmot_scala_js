@@ -1,0 +1,245 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Correlation heatmap") {
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Correlation heatmap</h2>
+		</div>
+	</div>
+
+	<form class="registration-form form-horizontal" id="form" accept-charset="UTF-8">
+
+		<div id="db">
+			<div class="form-group">
+				<label class="control-label col-sm-2">Sample Name:</label>
+				<div class="col-sm-10" >
+					<div class='checkbox' id='sampleName'></div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="actions col-sm-offset-2 col-sm-1">
+					<button type="button" class="btn btn-default" id="search" onclick="selectAll()">
+						Select All</button>
+				</div>
+				<div class="actions col-sm-3">
+					<button type="button" class="btn btn-default" id="search" onclick="reverseSelect()">
+						Reverse Select</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Or, upload file:</label>
+			<div class="col-sm-8">
+				<input id="input-1" type="file" class="file control-label" name="file" data-show-preview="false"
+				data-show-upload="false" accept=".txt">
+				<span class="help-block"><a href="@routes.ToolController.getExampleFile()?fileName=example.txt" target="_blank"><em>
+					Example file</em></a></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="actions col-sm-offset-2 col-sm-2">
+				<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+					Run</button>
+			</div>
+		</div>
+
+	</form>
+	<div  id="content" style="display: none">
+		<hr>
+		<div class="well" >
+
+			<div id="charts">No picture result!</div>
+		</div>
+	</div>
+
+	<script>
+
+			function selectAll() {
+				$(":checkbox").prop("checked", true)
+				$("#form").formValidation("revalidateField", "sampleName[]")
+			}
+
+			function reverseSelect() {
+				$(":checkbox").each(function () {
+					$(this).prop("checked", !$(this).prop("checked"));
+				});
+				$("#form").formValidation("revalidateField", "sampleName[]")
+
+			}
+
+			$(function () {
+
+				$.ajax({
+					url: "@routes.ToolController.getAllSampleNames()",
+					async: false,
+					type: "get",
+					success: function (data) {
+						$("#sampleName").empty()
+						$.each(data, function (i, v) {
+							var html = "<label style='margin-right: 15px;width: 250px;'>" +
+									"<input type='checkbox' name='sampleName[]'  value='" + v + "'>" + v +
+									"</label>"
+							$("#sampleName").append(html);
+						})
+
+					}
+				})
+
+			})
+
+			function queryCheck() {
+				var size = $(":input[name='sampleName[]']:checked").length
+				var file = $("input[name='file']").val()
+				var b = true
+				if (size == 0 && !file) {
+					b = false
+					swal("Error", "Please select sample name or upload file!", "error")
+				} else if (file && size != 0) {
+					b = false
+					swal("Error", "Please either select sample name or upload a file, not both!", "error")
+				}
+				return b
+			}
+
+			function mySearch() {
+				$("#content").hide()
+				var form = $("#form")
+				if (queryCheck()) {
+					var form1 = new FormData($("#form")[0])
+					var element = "<div id='content'><span id='info'>Running...</span>&nbsp;<img class='runningImage' src='@routes.Assets.at("images/running2.gif")' style='width: 30px;height: 20px;'></div>"
+					var index = layer.alert(element, {
+						skin: 'layui-layer-molv'
+						, closeBtn: 0,
+						title: "Info",
+						btn: []
+					});
+					$.ajax({
+						url: "@routes.ToolController.cHeatMap()",
+						type: "post",
+						processData: false,
+						contentType: false,
+						data: form1,
+						success: function (data) {
+							layer.close(index)
+							if (data.valid == "false") {
+								swal("Error", data.message, "error")
+								$("#charts").html("No picture result!！")
+							} else {
+								$("#content").show()
+								heatmap(data)
+							}
+						}
+					});
+				}
+			}
+
+			function heatmap(data) {
+				var chart = null;
+				var maxLabelNum = 30;
+				var step;
+				var xLen = data[0].treatment.length;
+				step = Math.round(xLen / maxLabelNum) < 1 ? 1 : Math.round(xLen / maxLabelNum);
+				$("#charts").highcharts({
+					plotOptions: {
+						heatmap: {
+							turboThreshold: 0 //不限制数据点个数
+						}
+					},
+					credits: {
+						enabled: false
+					},
+					chart: {
+						zoomType: 'xy',
+						type: 'heatmap',
+						height: 900,
+						marginTop: 65,
+						marginBottom: 170,
+						events: {
+							//监听图表区域选择事件
+							selection: function (event) {//动态修改
+								var len = event.xAxis[0].max - event.xAxis[0].min;
+								var interval = Math.round(len / maxLabelNum < 1 ? 1 : Math.round(len / maxLabelNum));
+								DynamicChangeTickInterval(interval);
+							}
+						}
+					},
+					title: {
+						text: null
+					},
+					xAxis: {
+						categories: data[0].treatment,
+						labels: {
+							rotation: -45,
+							style: {
+								fontSize: '12px',
+								fontFamily: 'Arial, sans-serif'
+							}
+						},
+						tickInterval: step,
+						title: {
+							text: 'Samples'
+						}
+					},
+					yAxis: {
+						labels: {
+							style: {
+								fontSize: '12px',
+								fontFamily: 'Arial, sans-serif'
+							}
+						},
+						categories: data[0].gt,
+						title: "Gene"
+					},
+					colorAxis: {
+						stops: [
+							[0.1, '#78b8ed'],
+							[0.5, '#fffbbc'],
+							[0.8, '#c4463a'],
+							[1, '#c4463a']
+						],
+						min: data[0].min,
+						max: data[0].max,
+//                        minColor: '#FFFFFF',
+//                        maxColor: Highcharts.getOptions().colors[0]
+					},
+					legend: {
+						title: {
+							style: {
+								fontWeight: '1',
+								color: '#555',
+								fontSize: '12px'
+							},
+							text: 'coefficient'
+						},
+						align: 'right',
+						layout: 'vertical',
+						marginTop: 0,
+						verticalAlign: 'top',
+						y: 25,
+						symbolHeight: 305
+					},
+					tooltip: {
+						formatter: function () {
+							return '<b>Sample Name(X):</b>' + this.series.xAxis.categories[this.point.x] + '<br>' + '<b>Sample Name(Y):</b>' + this.series.yAxis.categories[this.point.y] + '<br><b>coefficient: ' + this.point.value + '</b>';
+						}
+					},
+					series: [{
+						borderWidth: '0.2',
+						color: '#fefefe',
+						data: data[0].expression,
+						dataLabels: {
+							enabled: false
+						}
+					}]
+				}, function (chartObj) {
+					chart = chartObj;
+				});
+			}
+
+	</script>
+}

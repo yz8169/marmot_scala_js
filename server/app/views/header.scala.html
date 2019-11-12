@@ -1,0 +1,124 @@
+@()
+
+<style>
+		.navbar-nav {
+			margin-bottom: -60px;
+		}
+
+		.nav > li > a {
+			font-size: 15px;
+		}
+
+</style>
+
+<div class="page-header">
+	<div class="banner">
+		<div class="logo">
+			<h1><span style="font-size: 30px"><b>iMarmot:</b> <span style="font-size: 25px">an integrative Marmot database</span> </span>
+				<font style="font-size: 23px">&nbsp;
+				</font></h1>
+		</div>
+	</div>
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#coll" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="coll">
+			<ul class="nav navbar-nav">
+				<li><a href="@routes.AppController.toIndex()">Home</a></li>
+				<li class="dropdown">
+					<a href="#">Genome &nbsp;<span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu" >
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/data&tracks=<span style='display:none;'>1</span>Reference sequence ,<span style='display:none;'>3</span>Gene Name" target="_blank">
+							Himalayan marmot</a></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/alpine_marmot&tracks=DNA" target="_blank">
+							Alpine Marmot</a></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/yellow_marmot&tracks=DNA" target="_blank">
+							Yellow-bellied marmot</a></li>
+						<li class="divider"></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/data&tracks=<span style='display:none;'>1</span>Reference sequence ,Mongolia marmot" target="_blank">
+							Mongolia marmot SNP</a></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/data&tracks=<span style='display:none;'>1</span>Reference sequence ,Yellow-bellied marmot" target="_blank">
+							Yellow-bellied marmot SNP</a></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/data&tracks=<span style='display:none;'>1</span>Reference sequence ,Long-tailed marmot" target="_blank">
+							Long-tailed marmot SNP</a></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/data&tracks=<span style='display:none;'>1</span>Reference sequence ,Gray marmot" target="_blank">
+							Gray marmot SNP</a></li>
+						<li><a href="http://47.88.57.209:8080/jb/index.html?data=marmot/data&tracks=<span style='display:none;'>1</span>Reference sequence ,Albinistic Himalayan marmot" target="_blank">
+							Albinistic Himalayan marmot SNP</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#">Browse &nbsp;<span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu" >
+						<li><a href="@routes.BrowseController.goBefore()">GO</a></li>
+						<li><a href="@routes.BrowseController.keggBefore()">KEGG</a></li>
+						<li><a href="@routes.BrowseController.blockBefore()">Synteny block</a></li>
+@*						<li><a href="@routes.BrowseController.hibernateDiffGeneBefore()">Hibernation</a></li>*@
+					</ul>
+				</li>
+				<li><a href="@routes.SearchController.searchBefore()">Search</a></li>
+				<li class="dropdown">
+					<a href="#">Expression &nbsp;<span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu" >
+						@*<li><a href="@routes.HighlightsController.marmotSBefore()">MarmotS</a></li>*@
+						<li><a href="@routes.HighlightsController.hibernatorsBefore()">Hibernators</a></li>
+						<li><a href="@routes.HighlightsController.plagueBefore()">Plague hosts</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#">Tools &nbsp;<span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu" >
+						<li><a href="@routes.ToolController.enrichBefore()">Enrichment analysis</a></li>
+						<li><a href="@routes.ToolController.cHeatMapBefore()">Correlation heatmap</a></li>
+						<li><a href="@routes.ToolController.pCABefore()">PCA</a></li>
+						<li><a href="@routes.ToolController.hClusterBefore()">HCluster</a></li>
+						<div class="divider"></div>
+						<li><a href="@routes.SearchController.blastBefore()">Blast</a></li>
+						<li><a href="@routes.ToolController.muscleBefore()">Muscle</a></li>
+						<li><a href="@routes.ToolController.mummerBefore()">Lastz</a></li>
+						<li><a href="@routes.ToolController.geneWiseBefore()">GeneWise</a></li>
+						<li><a href="@routes.SearchController.seqMultipleQueryBefore()">Sequences fetch</a></li>
+					</ul>
+				</li>
+
+				<li><a href="@routes.DownloadController.toIndex()">Download</a></li>
+				<li><a href="@routes.AppController.toSubmit()">Submit</a></li>
+				<li><a href="@routes.SubmitController.toIndex()">Contact</a></li>
+				<li class="dropdown">
+					<a href="#">Help &nbsp;<span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu" >
+						<li><a href="@routes.AppController.toAbout()">About us</a></li>
+						<li><a href="@routes.AppController.toFaq()">FAQ</a></li>
+						<li><a href="@routes.AppController.toHow()">How to</a></li>
+					</ul>
+				</li>
+
+				<li style="float: right;position: absolute;right: 25px" >
+					<div class="" align="right" >
+						<form method="post" action="@routes.SearchController.searchBefore1()" class="form-inline"
+						style="padding-top: 10px;">
+							<div class="input-group" style="margin-left: 15px">
+								<input type="text" name="geneId" class="form-control"
+								placeholder="Keyword" id="geneId" style="height: 30px" size="15"/>
+								<span class="input-group-btn">
+									<button class="btn btn-primary" type="submit"
+									style="border-top-right-radius: 4px;
+										border-bottom-right-radius: 4px;height: 30px"><i class="fa fa-search"></i></button>
+								</span>
+							</div>
+						</form>
+
+					</div>
+				</li>
+
+			</ul>
+		</div>
+			<!--/.nav-collapse -->
+	</nav>
+</div>

@@ -1,0 +1,334 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Enrichment analysis-MARDB") {
+
+	<style>
+		.tab-pane form{
+			margin-top: 30px;
+		}
+
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Enrichment analysis</h2>
+		</div>
+	</div>
+
+	<div class="row">
+
+			<div class="tab-pane active" id="kegg">
+				<form class="form-horizontal" method="get" id="keggForm">
+
+					<div class="form-group">
+						<label class="control-label col-sm-2">Method:</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="anaMethod">
+								<option value="kegg">KEGG</option>
+								<option value="go">GO</option>
+
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group" id="queryContent">
+						<label class="control-label col-sm-2">Enter gene id:</label>
+						<div class="col-sm-8">
+							<textarea name="geneId" id="geneId" class="form-control" rows="5"></textarea>
+							<span class="help-block">
+								e.g.,&nbsp;<a href="#" onclick="showExample('keggForm')"><em id="egGeneId">
+								Mar00001,Mar00004,Mar00008</em></a></span>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-2">Or, upload file:</label>
+						<div class="col-sm-8">
+							<input id="input-1" type="file" class="file control-label" name="file" data-show-preview="false"
+							data-show-upload="false">
+							<span class="help-block"><a onclick="showExampleFile('keggForm')"><em>
+								Example file</em></a></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-2">Background:</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="database" onchange="Enrich.change(this,'keggForm')">
+								<option value="human">Human</option>
+								<option value="rat">Rat</option>
+								<option value="mouse">mouse</option>
+								<option value="rabbit">rabbit</option>
+								<option value="marmot" selected>Himalayan marmot</option>
+								<option value="yellow">Yellow-bellied marmot</option>
+								<option value="alpine">Alpine marmot</option>
+
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group" style="display: none">
+						<label class="control-label col-sm-2">Statistical test:</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="method">
+								<option value="b">binomial test</option>
+								<option value="c">chi-square test</option>
+								<option value="h" selected="selected">hypergeometric test / Fisher's exact test</option>
+							</select>
+						</div>
+
+						<label class="control-label col-sm-2">FDR correction:</label>
+						<div class="col-sm-3">
+							<select class="form-control" name="fdr">
+								<option value="BH" >Benjamini and Hochberg</option>
+								<option value="BY">Benjamini and Yekutieli</option>
+								<option value="QVALUE" selected="selected">QVALUE</option>
+							</select>
+						</div>
+
+					</div>
+
+					<div class="form-group">
+
+						<label class="control-label col-sm-2">P-value cutoff:</label>
+						<div class="col-sm-2">
+							<input class="form-control" name="pValue" id="pValue" value="0.05">
+						</div>
+						<div style="display: none">
+							<label class="control-label col-sm-2">Cutoff number:</label>
+							<div class="col-sm-2">
+								<input class="form-control" name="cutoff" id="cutoff" value="5">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="actions col-sm-offset-2 col-sm-2">
+							<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="Enrich.mySearch">
+								Run</button>
+						</div>
+
+						<div class="actions  col-sm-2">
+							<button type="reset" class="btn btn-primary" style="width: 90%;">
+								Reset</button>
+						</div>
+					</div>
+
+				</form>
+
+
+			</div>
+
+	</div>
+
+	<div id="result">
+		<hr>
+
+		<div id="keggResult" style="display: none">
+			<label>Select the columns to display:</label>
+			<div id="checkbox" class="checkbox">
+
+			</div>
+			<div id="toolbar">
+					&nbsp;Keyword：
+			</div>
+
+			<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+			data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-search-align="left" data-multiple-search="true"
+			style="table-layout: fixed;
+				word-wrap: break-word"
+			>
+				<thead>
+					<tr>
+						<th data-field='term' data-sortable='true' title="Term">Term</th>
+						<th data-field='database' data-sortable='true' title="Database">Database</th>
+						<th data-field='id' data-sortable='true' title="ID">ID</th>
+						<th data-field='inputNumber' data-sortable='true' title="Input number">Input number</th>
+						<th data-field='backgroundNumber' data-sortable='true' title="Background number">
+							Background number</th>
+						<th data-field='pValue' data-sortable='true' title="P-Value">P-Value</th>
+						<th data-field='cPValue' data-sortable='true' title="Corrected P-Value">Corrected P-Value</th>
+						<th data-field='input' data-sortable='true' title="Input">Input</th>
+						<th data-field='hyperlink' data-sortable='true' title="Hyperlink">Hyperlink</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+
+		<div id="goResult" style="display: none;">
+			<div id="goToolbar">
+					&nbsp;Keyword：
+			</div>
+
+			<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+			data-toolbar="#goToolbar" data-page-list="[10, 25, 50, 100, all]" data-search-align="left" data-multiple-search="true"
+			style="table-layout: fixed;
+				word-wrap: break-word"
+			>
+				<thead>
+					<tr>
+						<th data-field='namespace' data-sortable='true' title="Category">Category</th>
+						<th data-field='id' data-sortable='true' title="Go term">Go term</th>
+						<th data-field='description' data-sortable='true' title="Description">Description</th>
+						<th data-field='ratio_in_study' data-sortable='true' title="Ratio in study">Ratio in study</th>
+						<th data-field='ratio_in_pop' data-sortable='true' title="Ratio in background">Ratio in background</th>
+						<th data-field='p_uncorrected' data-sortable='true' title="P-value">P-value</th>
+						<th data-field='genes_in_study' data-sortable='true' title="Gene ID">Gene ID</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+
+	</div>
+
+	<script>
+
+			$(function () {
+
+				$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+					// 获取已激活的标签页的名称
+					var activeTab = $(e.target).text();
+					// 获取前一个激活的标签页的名称
+					var previousTab = $(e.relatedTarget).text();
+					$("#goResult").hide()
+					$("#keggResult").hide()
+				});
+
+				function extractor(query) {
+					var result = /([^,]+)$/.exec(query);
+					if (result && result[1])
+						return result[1].trim();
+					return '';
+				}
+
+				$.ajax({
+					url: "@routes.SearchController.getAllGeneIds()",
+					async: false,
+					type: "get",
+					success: function (data) {
+						$('#goForm #geneId,#keggForm #geneId').typeahead({
+							source: data,
+							updater: function (item) {
+								return this.$element.val().replace(/[^,]*$/, '') + item + ',';
+							},
+							matcher: function (item) {
+								var tquery = extractor(this.query);
+								if (!tquery) return false;
+								return ~item.toLowerCase().indexOf(tquery.toLowerCase())
+							},
+							highlighter: function (item) {
+								var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+								return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+									return '<strong>' + match + '</strong>'
+								})
+							}
+						})
+					}
+				})
+
+				var array = ["Database", "ID", "Input number", "Background number", "P-Value", "Corrected P-Value", "Input", "Hyperlink"]
+				var values = ["database", "id", "inputNumber", "backgroundNumber", "pValue", "cPValue", "input", "hyperlink"]
+				var html = ""
+				$.each(array, function (n, value) {
+							html += "<label style='margin-right: 15px'>" +
+									"<input type='checkbox' checked='checked' value='" + values[n] + "' onclick=\"setColumns('" + values[n] + "')\">" + value +
+									"</label>"
+						}
+				);
+				$("#keggResult #checkbox").append(html)
+				$('#keggResult #table').bootstrapTable({});
+				var hiddenArray = ["database", "pValue", "cPValue"]
+				$.each(hiddenArray, function (n, value) {
+							$('#keggResult #table').bootstrapTable('hideColumn', value);
+							$("input:checkbox[value=" + value + "]").attr("checked", false)
+						}
+				);
+
+				$('#goResult #table').bootstrapTable({});
+
+				formValidation()
+
+			})
+
+
+			function showExample(formId) {
+				var eg = $("#" + formId).find("#egGeneId").text().trim();
+				$("#" + formId).find('#geneId').val(eg);
+				$("#" + formId).formValidation("revalidateField", "geneId")
+			}
+
+			function showExampleFile(formId) {
+				var eg = $("#" + formId).find("#egGeneId").text().trim();
+				var content = eg.split(",").join("\n")
+				var w = window.open()
+				$(w.document.body).html("<pre>" + content + "</pre>")
+			}
+
+			function formValidation() {
+				var infinityNumber = Number.MAX_VALUE
+				$('#keggForm').formValidation({
+					framework: 'bootstrap',
+					icon: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						cutoff: {
+							validators: {
+								notEmpty: {
+									message: 'Cutoff number is required!'
+								},
+								integer: {
+									message: "Cutoff number must be integer!"
+								},
+								between: {
+									min: "1",
+									max: infinityNumber,
+									message: "Cutoff number must be more than 0!"
+								}
+							}
+						},
+						pValue: {
+							validators: {
+								notEmpty: {
+									message: 'P-Value cutoff number is required!'
+								},
+								numeric: {
+									message: "P-Value cutoff number must be numeric!"
+								},
+								between: {
+									min: "0",
+									max: infinityNumber,
+									message: "P-Value Cutoff number must be more than 0!"
+								}
+							}
+						},
+						file: {
+							validators: {
+								file: {
+									extension: 'txt',
+									message: 'Gene Id file must is a txt file！'
+								}
+							}
+						},
+
+					}
+				})
+			}
+
+			function setColumns(value) {
+				var element = $("input:checkbox[value=" + value + "]")
+				if (element.is(":checked")) {
+					$('#goResult #table,#keggResult #table').bootstrapTable('showColumn', value);
+				} else {
+					$('#goResult #table,#keggResult #table').bootstrapTable('hideColumn', value);
+				}
+			}
+
+	</script>
+
+
+}

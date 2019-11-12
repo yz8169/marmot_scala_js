@@ -1,0 +1,76 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("GO to genes-MARDB") {
+
+	<style>
+
+			.radio, .checkbox {
+				position: relative;
+				display: block;
+				margin-top: 5px;
+				margin-bottom: 10px;
+			}
+	</style>
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">GO to genes</h2>
+		</div>
+	</div>
+
+	<form class="registration-form form-horizontal" id="form" accept-charset="UTF-8">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Species:</label>
+			<div class="col-sm-10" >
+				<div class='radio' id='species'></div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Category:</label>
+			<div class="col-sm-10" >
+				<div class='checkbox' id='kinds'></div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="actions col-sm-offset-2 col-sm-3">
+				<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="Go.mySearch">
+					Search</button>
+			</div>
+		</div>
+
+
+	</form>
+	<hr>
+	<div id="content" style="display: none" >
+
+		<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+		data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-multiple-search="true"
+		style="word-wrap: break-word;">
+			<thead>
+				<tr>
+					<th data-field='term' data-sortable='true' data-formatter="Go.goFmt">ID</th>
+					<th data-field='kind' data-sortable='true' >Category</th>
+					<th data-field='description' data-sortable='true'>Term</th>
+					<th data-field='number' data-sortable='true' >Count</th>
+					<th data-field='genes' data-sortable='true' data-formatter="Go.genesFmt">Target Genes</th>
+				</tr>
+			</thead>
+		</table>
+
+
+	</div>
+
+
+	<script>
+			$(function () {
+				$("#table").bootstrapTable({})
+				Go.init
+			})
+	</script>
+
+
+}

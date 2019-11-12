@@ -1,0 +1,97 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Sequences fetch-MARDB") {
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Sequences fetch</h2>
+		</div>
+	</div>
+
+	<form class="registration-form form-horizontal" id="form"
+	accept-charset="UTF-8" method="post">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Region:</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="region" id="region" rows="5"></textarea>
+				<span class="help-block">e.g.,&nbsp;<a href="#"><em id="egRegion">
+					scaffold1:1-2000 scaffold1:2500-4000</em></a></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="actions col-sm-offset-2 col-sm-2">
+				<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+					Run</button>
+			</div>
+		</div>
+	</form>
+
+	<div id="result" style="display: none">
+		<hr>
+		<h4>Sequence:</h4>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<textarea class="form-control monospace" name="queryText" id="queryText" rows="15"></textarea>
+			</div>
+		</div>
+	</div>
+
+	<script>
+			$(function () {
+
+				$('#egRegion').click(function () {
+					var eg = $(this).text().trim();
+					$('#region').val(eg).focus();
+					$("#form").formValidation("revalidateField","region")
+				});
+				formValidation()
+			})
+
+			function formValidation() {
+				$('#form').formValidation({
+					framework: 'bootstrap',
+					icon: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						region: {
+							validators: {
+								notEmpty: {
+									message: 'Region is required！'
+								},
+							}
+						},
+					}
+				});
+			}
+
+			function mySearch() {
+				var form = $("#form")
+				var fv = form.data("formValidation")
+				fv.validate()
+				if (fv.isValid()) {
+					$("#search").attr("disabled", true).html("Search...")
+					$.ajax({
+						url: "@routes.SearchController.seqMultipleQuery()",
+						type: "post",
+						data: $("#form").serialize(),
+						success: function (data) {
+							$("#search").attr("disabled", false).html("Search").blur()
+							if (data.valid == "false") {
+								swal("Error", data.message, "error")
+								$("#result").hide()
+							} else {
+							    $("#queryText").val(data.data)
+								$("#result").show()
+							}
+						}
+					});
+				}
+			}
+	</script>
+}

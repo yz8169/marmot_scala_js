@@ -1,0 +1,117 @@
+{
+  "tracks": [
+    {
+      "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
+      "type": "SequenceTrack",
+      "chunkSize": 20000,
+      "seqType": "dna",
+      "category": "Himalayan marmot",
+      "storeClass": "JBrowse/Store/Sequence/StaticChunked",
+      "label": "<span style='display:none;'>1</span>Reference sequence "
+    },
+    {
+      "compress": 0,
+      "trackType": null,
+      "type": "FeatureTrack",
+      "category": "Himalayan marmot",
+      "urlTemplate": "tracks/GeneId/{refseq}/trackData.json",
+      "style": {
+        "className": "feature"
+      },
+      "storeClass": "JBrowse/Store/SeqFeature/NCList",
+      "label": "<span style='display:none;'>2</span>Gene ID"
+    },
+    {
+      "urlTemplate": "tracks/GeneName/{refseq}/trackData.json",
+      "type": "FeatureTrack",
+      "category": "Himalayan marmot",
+      "style": {
+        "className": "feature"
+      },
+      "storeClass": "JBrowse/Store/SeqFeature/NCList",
+      "label": "<span style='display:none;'>3</span>Gene Name",
+      "compress": 0,
+      "trackType": null
+    },
+    {
+      "compress": 0,
+      "category": "Himalayan marmot",
+      "trackType": null,
+      "label": "<span style='display:none;'>5</span>ncRNA",
+      "storeClass": "JBrowse/Store/SeqFeature/NCList",
+      "style": {
+        "className": "feature"
+      },
+      "type": "FeatureTrack",
+      "urlTemplate": "tracks/ncRNA/{refseq}/trackData.json"
+    },
+    {
+      "label": "<span style='display:none;'>4</span>Pseudogenes",
+      "category": "Himalayan marmot",
+      "storeClass": "JBrowse/Store/SeqFeature/NCList",
+      "style": {
+        "className": "feature"
+      },
+      "urlTemplate": "tracks/PseudoGenes/{refseq}/trackData.json",
+      "type": "FeatureTrack",
+      "compress": 0,
+      "trackType": null
+    },
+    {
+      "type": "CanvasVariants",
+      "storeClass": "JBrowse/Store/SeqFeature/VCFTabix",
+      "category" : "SNP",
+      "label": "Mongolia marmot",
+      "urlTemplate": "Mongolia\ marmot.vcf.gz"
+    },
+    {
+      "type": "CanvasVariants",
+      "storeClass": "JBrowse/Store/SeqFeature/VCFTabix",
+      "category" : "SNP",
+      "label": "Yellow-bellied marmot",
+      "urlTemplate": "Yellow-bellied\ marmot.vcf.gz"
+    },
+    {
+      "type": "CanvasVariants",
+      "storeClass": "JBrowse/Store/SeqFeature/VCFTabix",
+      "category" : "SNP",
+      "label": "Long-tailed marmot",
+      "urlTemplate": "Long-tailed\ marmot.vcf.gz"
+    },
+    {
+      "type": "CanvasVariants",
+      "storeClass": "JBrowse/Store/SeqFeature/VCFTabix",
+      "category" : "SNP",
+      "label": "Gray marmot",
+      "urlTemplate": "Gray\ marmot.vcf.gz"
+    },
+    {
+      "type": "CanvasVariants",
+      "storeClass": "JBrowse/Store/SeqFeature/VCFTabix",
+      "category" : "SNP",
+      "label": "Albinistic Himalayan marmot",
+      "urlTemplate": "albinistic\ Himalayan\ marmot.vcf.gz"
+    },
+    {
+      "storeClass": "JBrowse/Store/SeqFeature/NCList",
+      "label": "<span style='display:none;'>6</span>Repeat Sequence",
+      "urlTemplate": "tracks/Repeat/{refseq}/trackData.json",
+      "type": "FeatureTrack",
+      "category": "Himalayan marmot",
+      "style": {
+        "className": "feature"
+      },
+      "trackType": null,
+      "compress": 0
+    },
+    {
+      "storeClass": "JBrowse/Store/SeqFeature/SequenceChunks",
+      "type": "GCContent/View/Track/GCContentXY",
+      "label": "<span style='display:none;'>7</span>GC Content",
+      "category": "Himalayan marmot",
+      "urlTemplate": "seq/{refseq_dirpath}/{refseq}-",
+      "bicolor_pivot": 0.5
+    }
+  ],
+  "formatVersion": 1
+}

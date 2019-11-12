@@ -1,0 +1,193 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Search By Gene Name-MARDB") {
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Search By Gene Name</h2>
+		</div>
+	</div>
+
+	<form class="registration-form form-horizontal" id="form"
+	accept-charset="UTF-8" method="post">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Gene Name:</label>
+			<div class="col-sm-8">
+				<textarea name="geneName" id="geneId" class="form-control" rows="5"></textarea>
+				<span class="help-block">e.g.,&nbsp;<a href="#"><em id="egGeneId">
+					Ncam2,Tymp,Rfesd</em></a></span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="actions col-sm-offset-2 col-sm-2">
+				<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+					Search</button>
+			</div>
+		</div>
+	</form>
+
+	<div id="result" style="display: none">
+		<hr>
+
+		<label>Select the columns to display:</label>
+		<div id="checkbox" class="checkbox">
+
+		</div>
+		<div id="toolbar">
+				&nbsp;Keyword：
+		</div>
+
+		<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+		data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]" data-search-align="left" data-multiple-search="true"
+		style="table-layout: fixed;
+			word-wrap: break-word"
+		>
+			<thead>
+				<tr>
+					<th data-field='geneid' data-sortable='true'>Gene ID</th>
+					<th data-field='genename' data-sortable='true'>Gene Name</th>
+					<th data-field='length' data-sortable='true'>Length</th>
+					<th data-field='chr' data-sortable='true'>Chr</th>
+					<th data-field='start' data-sortable='true'>Start</th>
+					<th data-field='end' data-sortable='true'>End</th>
+					<th data-field='strand' data-sortable='true'>Strand</th>
+					<th data-field='cogclass' data-sortable='true'>COG_class</th>
+					<th data-field='cogclassanno' data-sortable='true'>COG_class_annotation</th>
+					<th data-field='goanno' data-sortable='true'>GO_annotation</th>
+					<th data-field='kegganno' data-sortable='true'>KEGG_annotation</th>
+					<th data-field='kogclass' data-sortable='true'>KOG_class</th>
+					<th data-field='kogclassanno' data-sortable='true'>KOG_class_annotation</th>
+					<th data-field='pfamanno' data-sortable='true'>Pfam_annotation</th>
+					<th data-field='swissprotanno' data-sortable='true'>Swissprot_annotation</th>
+					<th data-field='trenbkanno' data-sortable='true'>TrEMBL_annotation</th>
+					<th data-field='nranno' data-sortable='true'>nr_annotation</th>
+					<th data-field='ntanno' data-sortable='true'>nt_annotation</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+
+	<script>
+			$(function () {
+				function extractor(query) {
+					var result = /([^,]+)$/.exec(query);
+					if (result && result[1])
+						return result[1].trim();
+					return '';
+				}
+
+				$.ajax({
+					url: "@routes.SearchController.getAllGeneNames()",
+					async: false,
+					type: "get",
+					success: function (data) {
+						$('#geneId').typeahead({
+							source: data,
+							updater: function (item) {
+								return this.$element.val().replace(/[^,]*$/, '') + item + ',';
+							},
+							matcher: function (item) {
+								var tquery = extractor(this.query);
+								if (!tquery) return false;
+								return ~item.toLowerCase().indexOf(tquery.toLowerCase())
+							},
+							highlighter: function (item) {
+								var query = extractor(this.query).replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
+								return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+									return '<strong>' + match + '</strong>'
+								})
+							}
+						})
+					}
+				})
+
+				$('#egGeneId').click(function () {
+					var eg = $("#egGeneId").text().trim();
+					$('#geneId').val(eg);
+					$("#form").formValidation("revalidateField", "geneName")
+				});
+
+				var array = ["Gene Name","Length", "Chr", "Start", "End", "Strand",
+					"COG_class", "COG_class_annotation", "GO_annotation", "KEGG_annotation", "KOG_class", "KOG_class_annotation",
+					"Pfam_annotation", "Swissprot_annotation", "TrEMBL_annotation", "nr_annotation", "nt_annotation"
+				]
+
+				var values = ["genename","length", "chr", "start", "end", "strand",
+					"cogclass", "cogclassanno", "goanno", "kegganno", "kogclass",
+					"kogclassanno", "pfamanno", "swissprotanno", "trenbkanno", "nranno", "ntanno"
+				]
+				var html = ""
+				$.each(array, function (n, value) {
+							html += "<label style='margin-right: 15px'>" +
+									"<input type='checkbox' checked='checked' value='" + values[n] + "' onclick=\"setColumns('" + values[n] + "')\">" + value +
+									"</label>"
+						}
+				);
+				$("#checkbox").append(html)
+
+				$('#table').bootstrapTable({});
+				var hiddenArray = ["pfamanno", "kegganno", "goanno", "nranno", "ntanno", "trenbkanno", "kogclassanno", "swissprotanno",
+					"cogclassanno", "cogclass", "kogclass", "strand"]
+				$.each(hiddenArray, function (n, value) {
+							$('#table').bootstrapTable('hideColumn', value);
+							$("input:checkbox[value=" + value + "]").attr("checked", false)
+						}
+				);
+
+				formValidation()
+			})
+
+			function formValidation() {
+				$('#form').formValidation({
+					framework: 'bootstrap',
+					icon: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						geneName: {
+							validators: {
+								notEmpty: {
+									message: 'Gene Name is required！'
+								},
+							}
+						},
+					}
+				});
+			}
+
+			function mySearch() {
+				var form = $("#form")
+				var fv = form.data("formValidation")
+				fv.validate()
+				if (fv.isValid()) {
+					$("#search").attr("disabled", true).html("Search...")
+					$.ajax({
+						url: "@routes.SearchController.searchByGeneName()",
+						type: "post",
+						data: $("#form").serialize(),
+						success: function (data) {
+							$('#table').bootstrapTable("load", data);
+							$("#search").attr("disabled", false).html("Search").blur()
+							$("#result").show()
+						}
+					});
+				}
+			}
+
+			function setColumns(value) {
+				var element = $("input:checkbox[value=" + value + "]")
+				if (element.is(":checked")) {
+					$('#table').bootstrapTable('showColumn', value);
+				} else {
+					$('#table').bootstrapTable('hideColumn', value);
+				}
+			}
+	</script>
+
+
+}

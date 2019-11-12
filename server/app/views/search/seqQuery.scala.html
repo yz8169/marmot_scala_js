@@ -1,0 +1,152 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+@main("Sequence Fetch-MARDB") {
+
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">Sequence Fetch</h2>
+		</div>
+	</div>
+
+	<form class="registration-form form-horizontal" id="form"
+	accept-charset="UTF-8" method="post">
+
+		<div class="form-group">
+			<label class="control-label col-sm-2">Chromosome:</label>
+			<div class="col-sm-2">
+				<input class="form-control chr" name="chr" id="chr">
+			</div>
+			<label class="control-label">e.g., <a href="#"><em id="egChr">scaffold1</em></a></label>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">Start:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="start" id="start">
+			</div>
+			<label class="control-label">e.g., <a href="#"><em id="egStart">15</em></a></label>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">End:</label>
+			<div class="col-sm-2">
+				<input class="form-control" name="end" id="end">
+			</div>
+			<label class="control-label">e.g., <a href="#"><em id="egEnd">600000</em></a></label>
+		</div>
+
+		<div class="form-group">
+			<div class="actions col-sm-offset-2 col-sm-2">
+				<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+					Search</button>
+			</div>
+		</div>
+	</form>
+
+	<div id="result" style="display: none">
+		<hr>
+		<h4>Sequence:</h4>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<textarea class="form-control monospace" name="queryText" id="queryText" rows="15"></textarea>
+			</div>
+		</div>
+	</div>
+
+	<script>
+			$(function () {
+				$.ajax({
+					url: "@routes.SearchController.getAllChrs()",
+					async: false,
+					type: "get",
+					success: function (data) {
+						$('#chr').typeahead({
+							source: data,
+						})
+					}
+				})
+
+				$('#egChr').click(function () {
+					var eg = $(this).text().trim();
+					$('#chr').val(eg);
+					$("#form").formValidation("revalidateField","chr")
+				});
+				$('#egStart').click(function () {
+					var eg = $(this).text().trim();
+					$('#start').val(eg);
+					$("#form").formValidation("revalidateField","start")
+				});
+				$('#egEnd').click(function () {
+					var eg = $(this).text().trim();
+					$('#end').val(eg);
+					$("#form").formValidation("revalidateField","end")
+				});
+				formValidation()
+			})
+
+			function formValidation() {
+				$('#form').formValidation({
+					framework: 'bootstrap',
+					icon: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						chr: {
+							validators: {
+								notEmpty: {
+									message: 'Chromosome is required！'
+								},
+							}
+						},
+						start: {
+							validators: {
+								notEmpty: {
+									message: 'Start is required！'
+								},
+								integer: {
+									message: 'Start must be integer！'
+								},
+
+							}
+						},
+						end: {
+							validators: {
+								notEmpty: {
+									message: 'End is required！'
+								},
+								integer: {
+									message: 'End must be integer！'
+								},
+
+							}
+						},
+					}
+				});
+			}
+
+			function mySearch() {
+				var form = $("#form")
+				var fv = form.data("formValidation")
+				fv.validate()
+				if (fv.isValid()) {
+					$("#search").attr("disabled", true).html("Search...")
+					$.ajax({
+						url: "@routes.SearchController.seqQuery()",
+						type: "post",
+						data: $("#form").serialize(),
+						success: function (data) {
+							$("#search").attr("disabled", false).html("Search").blur()
+							if (data.valid == "false") {
+								swal("Error", data.message, "error")
+								$("#result").hide()
+							} else {
+							    $("#queryText").val(data.data)
+								$("#result").show()
+							}
+						}
+					});
+				}
+			}
+	</script>
+}

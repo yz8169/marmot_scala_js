@@ -1,0 +1,262 @@
+@()(implicit request: play.api.mvc.RequestHeader)
+
+	@main("Hibernation differential gene browse-MARDB") {
+
+		<style>
+
+				.radio, .checkbox {
+					position: relative;
+					display: block;
+					margin-top: 5px;
+					margin-bottom: 10px;
+				}
+		</style>
+
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<h2 class="page-heading"
+				style="text-align: left;
+					border-bottom: 5px solid #e9f3f4">Hibernation differential gene browse</h2>
+			</div>
+		</div>
+
+		<form class="registration-form form-horizontal" id="form" accept-charset="UTF-8">
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Species:</label>
+				<div class="col-sm-3">
+					<select class="form-control species" name="species"></select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Platform:</label>
+				<div class="col-sm-3">
+					<select class="form-control platform" name="platform"></select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Tissue:</label>
+				<div class="col-sm-3">
+					<select class="form-control tissue" name="tissue"></select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">log2FC:</label>
+				<div class="col-sm-2">
+					<input class="form-control" name="min"  placeholder="min">
+				</div>
+				<div class="col-sm-2">
+					<input class="form-control" name="max" placeholder="max"  id="max">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">Region:</label>
+				<div class="col-sm-2">
+					<input class="form-control chr" name="chr" id="chr" placeholder="chromosome">
+				</div>
+				<div class="col-sm-2">
+					<input class="form-control" name="start" placeholder="start"  id="start">
+				</div>
+				<div class="col-sm-2">
+					<input class="form-control" name="end" placeholder="end"  id="end">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="actions col-sm-offset-2 col-sm-3">
+					<button type="button" class="btn btn-primary" style="width: 90%;" id="search" onclick="mySearch()">
+						Search</button>
+				</div>
+			</div>
+
+
+		</form>
+		<hr>
+
+		<label>Select the columns to display:</label>
+		<div id="checkbox" class="checkbox">
+
+		</div>
+
+		<table class="display table table-bordered" id="table" data-pagination="true" data-search="true"
+		data-toolbar="#toolbar" data-page-list="[10, 25, 50, 100, all]"  data-multiple-search="true"
+		style="table-layout: fixed;
+			word-wrap: break-word"
+		>
+			<thead>
+				<tr>
+					<th data-field='geneId' data-sortable='true' data-formatter="geneIdFmt">GeneId</th>
+					<th data-field='geneSymbol' data-sortable='true' id="marker">GeneSymbol</th>
+					<th data-field='species' data-sortable='true' id="marker">Species</th>
+					<th data-field='platform' data-sortable='true' id="marker">Platform</th>
+					<th data-field='tissue' data-sortable='true' id="marker">Tissue</th>
+					<th data-field='log2fc' data-sortable='true' id="marker">log2FC</th>
+					<th data-field='pvalue' data-sortable='true' id="marker">p-value</th>
+					<th data-field='str' data-sortable='true' id="marker" data-formatter="regionFmt">region</th>
+				</tr>
+			</thead>
+		</table>
+
+		<script>
+				$(function () {
+					$('#table').bootstrapTable({});
+					getAllHibernationDiffGene()
+					refreshChr()
+					HibernateDiffGene.init
+
+					var array = ["p-value", "GeneSymbol", "Region"]
+					var values = ["pvalue", "geneSymbol", "str"]
+					var html = ""
+					$.each(array, function (n, value) {
+								html += "<label style='margin-right: 15px'>" +
+										"<input type='checkbox' checked  value='" + values[n] + "' onclick=\"setColumns('" + values[n] + "')\">" + value +
+										"</label>"
+							}
+					);
+					$("#checkbox").append(html)
+
+					var hiddenColumns=["pvalue", "geneSymbol"]
+					$.each(hiddenColumns, function (n, value) {
+						$("#table").bootstrapTable('hideColumn', value);
+						$("input:checkbox[value='" + value + "']").attr("checked", false)
+					})
+
+					formValidation()
+
+
+				})
+
+				function mySearch() {
+					var form = $("#form")
+					var fv = form.data("formValidation")
+					fv.validate()
+					if (fv.isValid()) {
+						var element = "<div id='content'><span id='info'>Running...</span>&nbsp;<img class='runningImage' src='@routes.Assets.at("images/running2.gif")' style='width: 30px;height: 20px;'></div>"
+						var index = layer.alert(element, {
+							skin: 'layui-layer-molv'
+							, closeBtn: 0,
+							title: "Info",
+							btn: []
+						});
+						$.ajax({
+							url: "@routes.BrowseController.searchHDG()",
+							type: "post",
+							data: $("#form").serialize(),
+							async: false,
+							success: function (data) {
+								layer.close(index)
+								$("#table").bootstrapTable("load", data)
+							}
+						});
+					}
+				}
+
+				function setColumns(value) {
+					var element = $("input:checkbox[value=" + value + "]")
+					if (element.is(":checked")) {
+						$('#table').bootstrapTable('showColumn', value);
+					} else {
+						$('#table').bootstrapTable('hideColumn', value);
+					}
+				}
+
+				function geneIdFmt(value, row, index) {
+					var value = row.geneId
+					if (value != "na") {
+						value = "<a target='_blank' href='@routes.SearchController.getDetailInfo?geneId="+value+"'>"+value+"</a>"
+					}
+					return value
+				}
+
+				function regionFmt(value, row, index) {
+					var value = "na"
+					if (row.chr != "暂无") {
+						value = row.chr + ":" + row.start + "-" + row.end
+					}
+					return value
+				}
+
+				function getAllHibernationDiffGene() {
+					var index = layer.load(1, {
+						shade: [0.1, '#fff']
+					});
+					$.ajax({
+						url: "@routes.BrowseController.getAllHibernationDiffGene()",
+						type: "get",
+						dataType: "json",
+						success: function (data) {
+							layer.close(index)
+							$("#table").bootstrapTable("load", data)
+						}
+					})
+				}
+
+				function refreshChr() {
+					$.ajax({
+						url: "@routes.BrowseController.getAllChr()",
+						type: "get",
+						dataType: "json",
+						success: function (data) {
+							$('#chr').typeahead({
+								source: data,
+							})
+						}
+					})
+				}
+
+				function formValidation() {
+					$('#form').formValidation({
+								framework: 'bootstrap',
+								icon: {
+									valid: 'glyphicon glyphicon-ok',
+									invalid: 'glyphicon glyphicon-remove',
+									validating: 'glyphicon glyphicon-refresh'
+								},
+								fields: {
+									start: {
+										validators: {
+											integer: {
+												message: 'Start must be integer！'
+											},
+
+										}
+									},
+									end: {
+										validators: {
+											integer: {
+												message: 'End must be integer！'
+											},
+
+										}
+									},
+									min: {
+										validators: {
+											numeric: {
+												message: 'Min value must be numeric！'
+											},
+
+										}
+									},
+									max: {
+										validators: {
+											numeric: {
+												message: 'Max value must be numeric！'
+											},
+
+										}
+									},
+
+
+								}
+							}
+					);
+				}
+
+		</script>
+
+
+	}
