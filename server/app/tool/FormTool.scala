@@ -129,7 +129,8 @@ class FormTool {
 
   val questionForm = Form(
     mapping(
-      "question" -> text
+      "question" -> text,
+      "email" -> text
     )(QuestionData.apply)(QuestionData.unapply)
   )
 

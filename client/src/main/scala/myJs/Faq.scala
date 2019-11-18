@@ -37,6 +37,16 @@ object Faq {
             )
           )
         ),
+        "email" -> js.Dictionary(
+          "validators" -> js.Dictionary(
+            "notEmpty" -> js.Dictionary(
+              "message" -> "email is required！",
+            ),
+            "emailAddress" -> js.Dictionary(
+              "message" -> "email is invalid！",
+            ),
+          )
+        ),
       )
     )
     g.$("#form").bootstrapValidator(dict)

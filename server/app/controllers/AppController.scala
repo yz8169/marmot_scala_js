@@ -8,7 +8,11 @@ import play.api.libs.json.Json
 import play.api.mvc._
 import play.api.routing.JavaScriptReverseRouter
 import tool.{FormTool, Tool}
+import utils.Utils
+import utils.Utils.Info
+
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 class AppController @Inject()(cc: ControllerComponents, formTool: FormTool, questionDao: QuestionDao) extends AbstractController(cc) {
 
@@ -44,13 +48,24 @@ class AppController @Inject()(cc: ControllerComponents, formTool: FormTool, ques
     Ok(views.html.how())
   }
 
-  def addQuestion = Action.async { implicit request =>
+  def addQuestion = Action { implicit request =>
     val data = formTool.questionForm.bindFromRequest().get
-    val ip = Tool.getIp
-    val row = QuestionRow(0, data.question, new DateTime(), ip)
-    questionDao.insert(row).map { x =>
-      Ok(Json.toJson("success"))
+    Future {
+      val content =
+        s"""
+           |User submit a question：<br>
+           |----------------------------------<br>
+           |user email：${data.email}<br>
+           |user question：${data.question}<br>
+           |----------------------------------<br>
+           |Regards,<br>
+           |VGsoft Team
+       """.stripMargin
+      val info = Info("iMarmot user submit notice", content)
+      val inbox = "liubaoning88@stu.xjtu.edu.cn"
+      Utils.sendEmailBySsl(Utils.sender, info, inbox)
     }
+    Ok(Json.toJson("success"))
 
   }
 

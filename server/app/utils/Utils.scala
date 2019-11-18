@@ -250,6 +250,9 @@ object Utils {
     println(time)
   }
 
+  val sender = Sender("VGsoft Team", "smtp.exmail.qq.com", "notice@vgbioteam.com", "Abc1144612652")
+
+
   val rPath = {
     val windowsPath = "D:\\workspaceForIDEA\\marDatabase\\rScripts"
     val linuxPath = s"${path}/rScripts"
