@@ -4,7 +4,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.data.format.Formats._
 import play.api.data.format.Formats.doubleFormat
-import tool.Pojo.SpeciesData
+import tool.Pojo.{QuestionData, SpeciesData}
 
 
 /**
@@ -125,6 +125,12 @@ class FormTool {
       "wordSize" -> text,
       "maxTargetSeqs" -> text
     )(QueryData.apply)(QueryData.unapply)
+  )
+
+  val questionForm = Form(
+    mapping(
+      "question" -> text
+    )(QuestionData.apply)(QuestionData.unapply)
   )
 
   case class BlastData(queryText: Option[String], againstType: String, evalue: String, wordSize: String, maxTargetSeqs: String)

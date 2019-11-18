@@ -14,6 +14,7 @@ import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import models.Tables._
 import play.api.libs.json.Json
+import play.api.mvc.RequestHeader
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -230,6 +231,10 @@ object Tool {
       case "alpine" => new File(Utils.seqsDir, "Alpine_marmot_longest.GCF_001458135.1_marMar2.1_genomic.pep")
       case "yellow" => new File(Utils.seqsDir, "longest.Yellow-bellied_marmot_genomic.pep")
     }
+  }
+
+  def getIp(implicit request:RequestHeader)={
+    request.remoteAddress
   }
 
 

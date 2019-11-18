@@ -10,9 +10,10 @@ GET         /MARDB/app/toHelp                              controllers.AppContro
 GET         /MARDB/app/toHibernation                       controllers.AppController.toHibernation
 GET         /MARDB/app/toIntroduction                      controllers.AppController.toIntroduction
 GET         /MARDB/app/toSubmit                            controllers.AppController.toSubmit
-GET         /MARDB/app/toAbout                            controllers.AppController.toAbout
-GET         /MARDB/app/toFaq                            controllers.AppController.toFaq
-GET         /MARDB/app/toHow                            controllers.AppController.toHow
+GET         /MARDB/app/toAbout                             controllers.AppController.toAbout
+GET         /MARDB/app/toFaq                               controllers.AppController.toFaq
+GET         /MARDB/app/toHow                               controllers.AppController.toHow
+POST        /MARDB/app/addQuestion                         controllers.AppController.addQuestion
 
 GET         /MARDB/search/searchByGeneIdBefore             controllers.SearchController.searchByGeneIdBefore
 GET         /MARDB/search/getAllGeneIds                    controllers.SearchController.getAllGeneIds

@@ -15,4 +15,6 @@ object Pojo {
 
   case class GeneGoSeq(geneId:String,seq:Seq[String])
 
+  case class QuestionData(question:String)
+
 }

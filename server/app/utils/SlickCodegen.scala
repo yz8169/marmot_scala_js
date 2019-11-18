@@ -17,7 +17,7 @@ import scala.concurrent.{Await, Future}
 object SlickCodegen {
   def main(args: Array[String]): Unit = {
     val slickDriver = "slick.jdbc.MySQLProfile"
-    val url = "jdbc:mysql://localhost:3306/mardb?useUnicode=true&characterEncoding=UTF-8"
+    val url = "jdbc:mysql://192.168.0.136:3306/mardb?useUnicode=true&characterEncoding=UTF-8"
     val jdbcDriver = "com.mysql.jdbc.Driver"
     val user = "root"
     val password = "Yingfei123"

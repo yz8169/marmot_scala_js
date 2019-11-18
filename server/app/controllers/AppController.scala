@@ -1,41 +1,57 @@
 package controllers
 
+import dao.QuestionDao
 import javax.inject.Inject
+import models.Tables.QuestionRow
+import org.joda.time.DateTime
+import play.api.libs.json.Json
 import play.api.mvc._
 import play.api.routing.JavaScriptReverseRouter
+import tool.{FormTool, Tool}
+import scala.concurrent.ExecutionContext.Implicits.global
 
-class AppController @Inject()(cc:ControllerComponents) extends AbstractController(cc){
+class AppController @Inject()(cc: ControllerComponents, formTool: FormTool, questionDao: QuestionDao) extends AbstractController(cc) {
 
-  def toIndex = Action {implicit request=>
+  def toIndex = Action { implicit request =>
     Ok(views.html.index())
   }
 
-  def toHelp=Action{implicit request=>
+  def toHelp = Action { implicit request =>
     Ok(views.html.help())
   }
 
-  def toHibernation = Action {implicit request=>
+  def toHibernation = Action { implicit request =>
     Ok(views.html.hibernation())
   }
 
-  def toIntroduction = Action {implicit request=>
+  def toIntroduction = Action { implicit request =>
     Ok(views.html.introduction())
   }
 
-  def toSubmit = Action {implicit request=>
+  def toSubmit = Action { implicit request =>
     Ok(views.html.submission())
   }
 
-  def toAbout = Action {implicit request=>
+  def toAbout = Action { implicit request =>
     Ok(views.html.about())
   }
 
-  def toFaq = Action {implicit request=>
+  def toFaq = Action { implicit request =>
     Ok(views.html.faq())
   }
 
-  def toHow = Action {implicit request=>
+  def toHow = Action { implicit request =>
     Ok(views.html.how())
+  }
+
+  def addQuestion = Action.async { implicit request =>
+    val data = formTool.questionForm.bindFromRequest().get
+    val ip = Tool.getIp
+    val row = QuestionRow(0, data.question, new DateTime(), ip)
+    questionDao.insert(row).map { x =>
+      Ok(Json.toJson("success"))
+    }
+
   }
 
   def javascriptRoutes = Action { implicit request =>
@@ -80,18 +96,15 @@ class AppController @Inject()(cc:ControllerComponents) extends AbstractControlle
         controllers.routes.javascript.GeneBlockController.getBlocks,
 
         controllers.routes.javascript.AppController.toIntroduction,
+        controllers.routes.javascript.AppController.addQuestion,
 
         controllers.routes.javascript.ToolController.goEnrich,
         controllers.routes.javascript.ToolController.keggEnrich,
 
 
-
-
-
       )
     ).as("text/javascript")
   }
-
 
 
 }

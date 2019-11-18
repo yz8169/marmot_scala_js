@@ -1,89 +1,121 @@
 @()(implicit request: play.api.mvc.RequestHeader)
-	@main("FAQ -MARDB") {
+@main("FAQ -MARDB") {
 
-		<style>
-				.paragraph {
-					font-size: 15px;
-					line-height: 1.8em;
-					width: 1000px;
-				}
+	<style>
+			.paragraph {
+				font-size: 15px;
+				line-height: 1.8em;
+				width: 1000px;
+			}
 
-				.bold {
-					font-weight: bold;
-				}
+			.bold {
+				font-weight: bold;
+			}
 
-		</style>
+	</style>
 
-		<div class="row">
-			<div class="form-group col-sm-12">
-				<h2 class="page-heading"
-				style="text-align: left;
-					border-bottom: 5px solid #e9f3f4">
-					FAQ
-				</h2>
-			</div>
+	<div class="row">
+		<div class="form-group col-sm-12">
+			<h2 class="page-heading"
+			style="text-align: left;
+				border-bottom: 5px solid #e9f3f4">
+				FAQ
+			</h2>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-sm-12">
-				<p class="paragraph bold">
-					1.How does iMarmot database acquire the information?
-				</p>
-				<p class="paragraph">
-					The iMarmot is a manually integrated database. Our team will keep pace with the advanced research in marmots, collect the data from the common-used bioinformatics database (such as GEO) and iMarmot users’ submission, then process it through our customized pipelines.
-				</p>
-			</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="paragraph bold">
+				1.How does iMarmot database acquire the information?
+			</p>
+			<p class="paragraph">
+				The iMarmot is a manually integrated database. Our team will keep pace with the advanced research in marmots, collect the data from the common-used bioinformatics database (such as GEO) and iMarmot users’ submission, then process it through our customized pipelines.
+			</p>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-sm-12">
-				<p class="paragraph bold">
-					2.How often does new data appear on the iMarmot database?
-				</p>
-				<p class="paragraph">
-					We would retrieve the common-used databases and users’ submission at the first of each month. Once the new data is available, we would process it within one month in most cases. If came across large data size, we may slightly extend the release time.
-				</p>
-				<p class="paragraph bold">
-					3.How do I cite iMarmot?
-				</p>
-				<p class="paragraph">
-					While using or discussing iMarmot, please refer to our paper:<br>
-					Bai L, Liu B, Ji C, et al. Hypoxic and cold adaptation insights from the Himalayan marmot. genome. iScience. 2019; 11: 519-530.
-				</p>
-				<p class="paragraph bold">
-					4.What reference assembly does the iMarmot use for detecting the genomic variations of the marmot species?
-				</p>
-				<p class="paragraph">
-					The genomic variations of marmot species are detected according to the Himalayan marmot genome.
-				</p>
-				<p class="paragraph bold">
-					5.I would like to download marmots’ data in batch mode. Is there a central location from where I can download them?
-				</p>
-				<p class="paragraph">
-					Yes, you can download data from Download page, which including the following data: the assembly, protein and CDS sequence, and functional annotation of protein coding genes of three marmots, genomic variations of five marmots, expression profile of hibernators and plague hosts.
-				</p>
-				<p class="paragraph bold">
-					6.If I feel there is a mistake in the interpretation of data presented in the database, whom should I contact?
-				</p>
-				<p class="paragraph">
-					Sure, you can send your comments to <a href="mailto:liuenqi@@xjtu.edu.cn">liuenqi@@xjtu.edu.cn</a>
-					. In most cases, you should see the changes within a couple of weeks.
-				</p>
-				<p class="paragraph bold">
-					7.Can I submit my data to iMarmot?
-				</p>
-				<p class="paragraph">
-					Yes, iMarmot database welcomes the database users to share their data with us. Please send your data to <a href="mailto:liuenqi@@xjtu.edu.cn">
-					liuenqi@@xjtu.edu.cn</a> and refer to the Submit page for data format and size restrictions.
-				</p>
-			</div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="paragraph bold">
+				2.How often does new data appear on the iMarmot database?
+			</p>
+			<p class="paragraph">
+				We would retrieve the common-used databases and users’ submission at the first of each month. Once the new data is available, we would process it within one month in most cases. If came across large data size, we may slightly extend the release time.
+			</p>
+			<p class="paragraph bold">
+				3.How do I cite iMarmot?
+			</p>
+			<p class="paragraph">
+				While using or discussing iMarmot, please refer to our paper:<br>
+				Bai L, Liu B, Ji C, et al. Hypoxic and cold adaptation insights from the Himalayan marmot. genome. iScience. 2019; 11: 519-530.
+			</p>
+			<p class="paragraph bold">
+				4.What reference assembly does the iMarmot use for detecting the genomic variations of the marmot species?
+			</p>
+			<p class="paragraph">
+				The genomic variations of marmot species are detected according to the Himalayan marmot genome.
+			</p>
+			<p class="paragraph bold">
+				5.I would like to download marmots’ data in batch mode. Is there a central location from where I can download them?
+			</p>
+			<p class="paragraph">
+				Yes, you can download data from Download page, which including the following data: the assembly, protein and CDS sequence, and functional annotation of protein coding genes of three marmots, genomic variations of five marmots, expression profile of hibernators and plague hosts.
+			</p>
+			<p class="paragraph bold">
+				6.If I feel there is a mistake in the interpretation of data presented in the database, whom should I contact?
+			</p>
+			<p class="paragraph">
+				Sure, you can send your comments to <a href="mailto:bailiang0922@@xjtu.edu.cn">
+				bailiang0922@@xjtu.edu.cn</a>. In most cases, you should see the changes within a couple of weeks.
+			</p>
+			<p class="paragraph bold">
+				7.Can I submit my data to iMarmot?
+			</p>
+			<p class="paragraph">
+				Yes, iMarmot database welcomes the database users to share their data with us. Please refer to the Submit page for data format and size restrictions.
+			</p>
 		</div>
+	</div>
+	<hr>
+
+	<div class="row">
+		<div class="col-sm-12">
+
+			<p class="paragraph" style="margin-bottom: 20px">
+				Submit your question:
+			</p>
+
+			<form class="registration-form form-horizontal" id="form" accept-charset="UTF-8">
+
+				<div class="form-group">
+					<label class="control-label col-sm-1">question:</label>
+					<div class="col-sm-8">
+						<textarea name="question" class="form-control" rows="5"></textarea>
+
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<div class="actions col-sm-offset-1 col-sm-2">
+						<button type="button" class="btn btn-primary" style="width: 90%;" id="search"
+						onclick="Faq.mySearch">Submit</button>
+					</div>
+				</div>
+			</form>
 
 
-		<script>
-				$(function () {
-				})
+		</div>
+	</div>
 
-		</script>
 
-	}
+	<script>
+			$(function () {
+			    Faq.init
+			})
+
+	</script>
+
+}

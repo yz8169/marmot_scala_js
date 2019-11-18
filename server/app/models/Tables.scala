@@ -16,7 +16,7 @@ trait Tables {
   import slick.jdbc.{GetResult => GR}
 
   /** DDL for all tables. Call .create to execute. */
-  lazy val schema: profile.SchemaDescription = Array(Allinfo.schema, Basic.schema, Cds.schema, Fpkm.schema, Fpkmmessage.schema, GeneBlock.schema, GeneGo.schema, GeneKegg.schema, Go.schema, HiberList.schema, HibernationDiffGene.schema, Kegg.schema, Mode.schema, Orthologs.schema, OtherOrthologs.schema, Pep.schema, PlagueList.schema).reduceLeft(_ ++ _)
+  lazy val schema: profile.SchemaDescription = Array(Allinfo.schema, Basic.schema, Cds.schema, Fpkm.schema, Fpkmmessage.schema, GeneBlock.schema, GeneGo.schema, GeneKegg.schema, Go.schema, HiberList.schema, HibernationDiffGene.schema, Kegg.schema, Mode.schema, Orthologs.schema, OtherOrthologs.schema, Pep.schema, PlagueList.schema, Question.schema).reduceLeft(_ ++ _)
   @deprecated("Use .schema instead of .ddl", "3.0")
   def ddl = schema
 
@@ -643,4 +643,33 @@ trait Tables {
   }
   /** Collection-like TableQuery object for table PlagueList */
   lazy val PlagueList = new TableQuery(tag => new PlagueList(tag))
+
+  /** Entity class storing rows of table Question
+   *  @param id Database column id SqlType(INT), AutoInc, PrimaryKey
+   *  @param question Database column question SqlType(LONGTEXT), Length(2147483647,true)
+   *  @param time Database column time SqlType(DATETIME)
+   *  @param ip Database column ip SqlType(VARCHAR), Length(255,true) */
+  case class QuestionRow(id: Int, question: String, time: DateTime, ip: String)
+  /** GetResult implicit for fetching QuestionRow objects using plain SQL queries */
+  implicit def GetResultQuestionRow(implicit e0: GR[Int], e1: GR[String], e2: GR[DateTime]): GR[QuestionRow] = GR{
+    prs => import prs._
+    QuestionRow.tupled((<<[Int], <<[String], <<[DateTime], <<[String]))
+  }
+  /** Table description of table question. Objects of this class serve as prototypes for rows in queries. */
+  class Question(_tableTag: Tag) extends profile.api.Table[QuestionRow](_tableTag, Some("mardb"), "question") {
+    def * = (id, question, time, ip) <> (QuestionRow.tupled, QuestionRow.unapply)
+    /** Maps whole row to an option. Useful for outer joins. */
+    def ? = (Rep.Some(id), Rep.Some(question), Rep.Some(time), Rep.Some(ip)).shaped.<>({r=>import r._; _1.map(_=> QuestionRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
+
+    /** Database column id SqlType(INT), AutoInc, PrimaryKey */
+    val id: Rep[Int] = column[Int]("id", O.AutoInc, O.PrimaryKey)
+    /** Database column question SqlType(LONGTEXT), Length(2147483647,true) */
+    val question: Rep[String] = column[String]("question", O.Length(2147483647,varying=true))
+    /** Database column time SqlType(DATETIME) */
+    val time: Rep[DateTime] = column[DateTime]("time")
+    /** Database column ip SqlType(VARCHAR), Length(255,true) */
+    val ip: Rep[String] = column[String]("ip", O.Length(255,varying=true))
+  }
+  /** Collection-like TableQuery object for table Question */
+  lazy val Question = new TableQuery(tag => new Question(tag))
 }

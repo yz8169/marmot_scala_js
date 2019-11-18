@@ -37,9 +37,9 @@ object Detail {
         case SharedTool.himalayanName =>
           s"http://47.88.57.209:8080/jb/index.html?data=marmot/data&loc=${loc}&tracks=<span style='display:none;'>1</span>Reference sequence ,<span style='display:none;'>3</span>Gene Name&tracklist=0&nav=1&overview=0"
         case SharedTool.alpineName =>
-          s"http://47.88.57.209:8080/jb/index.html?data=marmot/alpine_marmot&loc=${loc}&tracks=DNA&tracklist=0&nav=1&overview=0"
+          s"http://47.88.57.209:8080/jb/index.html?data=marmot/alpine_marmot&loc=${loc}&tracks=DNA,Annotation&tracklist=0&nav=1&overview=0"
         case SharedTool.yellowName =>
-          s"http://47.88.57.209:8080/jb/index.html?data=marmot/yellow_marmot&loc=${loc}&tracks=DNA&tracklist=0&nav=1&overview=0"
+          s"http://47.88.57.209:8080/jb/index.html?data=marmot/yellow_marmot&loc=${loc}&tracks=DNA,Annotation&tracklist=0&nav=1&overview=0"
       }
       $("#jBrowse").attr("src", src)
       if (species != SharedTool.himalayanName) {
