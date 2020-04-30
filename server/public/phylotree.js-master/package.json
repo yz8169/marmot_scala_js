@@ -17,7 +17,7 @@
     "font-awesome": "4.x",
     "bootstrap": "3.x",
     "d3": "3.x",
-    "jquery": "1.x"
+    "jquery": "3.x"
   },
   "devDependencies": {
     "jsdom": "9.12.x",
